@@ -15,16 +15,17 @@ Las características principales que tiene esta aplicación son:
 
 Librerias utilizadas y versiones: 
 
-* JQuery v.1.12.4
-* Bootstrap v.3.3.7
-* Font-Awesome v.4.7.0
-* AngularJS v.1.6.4
-* AngularCSS v.1.0.8
+* [JQuery v.1.12.4](http://jquery.com)
+* [Bootstrap v.3.3.7](http://getbootstrap.com/2.3.2/)
+* [Font-Awesome v.4.7.0](http://fontawesome.io)
+* [AngularJS v.1.6.4](https://angularjs.org)
+* [AngularCSS v.1.0.8](https://github.com/castillo-io/angular-css)
 
 Los modulos AngularJS creados como parte del core de la app son: 
 
 * app-auth: Autenticación y gestión de acceso de usuarios a la aplicación
 * app-ui: Gestor de todo lo relacionado con la interfaz gráfica
+* app-history: Módulo personalizado para gestionar el historial de navegación de la a
 
 Los modulos AngularJS de terceros que se han utilizados son: 
 
