@@ -9,8 +9,7 @@ $(document).ready(function(){
 
   //load external libraries (bootstrap, angular, font-awesome)
   _load([
-    'vendors/bootstrap/v3.3.7/js/bootstrap.min.js',
-    'vendors/bootstrap/v3.3.7/css/bootstrap-responsive.min.css',
+    //'../commons/vendors/bootstrap/v3.3.7/css/bootstrap-responsive.min.css',
     'vendors/font-awesome/v4.7.0/css/font-awesome.min.css'
   ], function(){
 
@@ -26,6 +25,7 @@ $(document).ready(function(){
       _load([
         'js/app.js',
         'js/core/ui/app-ui.module.js',
+        'js/core/history/app-history.module.js',
         'js/core/auth/app-auth.module.js'
       ], function(){
 

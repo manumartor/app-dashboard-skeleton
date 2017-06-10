@@ -14,13 +14,19 @@ angular.module('app.auth', ['ngCookies'])
 /**
  * Define the controllers
  **/
-
 .controller('loginController', function($appAuth, $scope, $location){
   console.log('Controller App-auth::loginController ini');
   //@todo: //https://github.com/sahat/satellizer
   
   //clear credentials
   $appAuth.clearCredentials();
+  
+  console.log('Controller App-auth::loginController end');
+})
+
+.controller('loginLayerController', function($appAuth, $scope, $location){
+  console.log('Controller App-auth::loginFormController ini');
+  //@todo: //https://github.com/sahat/satellizer
 
   //set login function
   $scope.login = function () {
@@ -35,29 +41,18 @@ angular.module('app.auth', ['ngCookies'])
       }
     });
   };
-  
-  console.log('Controller App-auth::loginController end');
-})
-
-
-/**
- * Define the component
- **/
-.component('loginLayerComponent', {
-  css: 'js/core/auth/css/signin.css',
-  templateUrl: "js/core/auth/views/login.html", 
-  controller: "loginController"
+  console.log('Controller App-auth::loginFormController end');
 })
 
 /**
  * Run module
  **/
-.run(['$rootScope', '$location', '$cookieStore', '$http', '$compile', '$appAuth', function ($rootScope, $location, $cookieStore, $http, $compile, $appAuth) {
+.run(['$rootScope', '$location', '$cookieStore', '$http', '$appAuth', function ($rootScope, $location, $cookieStore, $http, $appAuth) {
   console.log('Module App-auth::run ini...');
   
   // keep user logged in after page refresh
   $rootScope.globals = $cookieStore.get('globals') || {};
-  if ($rootScope.globals.currentUser) {
+  if ($appAuth.isLogged()) {
       console.log('Module App-auth::run renovating user credentials headers');
       $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
   }
@@ -69,7 +64,7 @@ angular.module('app.auth', ['ngCookies'])
       }
       console.log('Module App-auth::run Checking user auth... in path: ' + $location.path());
       // redirect to login page if not logged in
-      if (!$rootScope.globals.currentUser) {
+      if (!$appAuth.isLogged()) {
           console.log('Module App-auth::run Redirecting to /login becouse no userdata founded');
           $location.path('/login');
       }
@@ -82,6 +77,7 @@ angular.module('app.auth', ['ngCookies'])
  **/
 _load([
   'js/core/auth/app-auth.config.js',
+  'js/core/auth/app-auth.component.js',
   'js/core/auth/app-auth.provider.js',
   'js/core/auth/app-auth-base64.factory.js'
 ]);

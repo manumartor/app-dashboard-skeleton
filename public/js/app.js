@@ -9,33 +9,35 @@
  * @version: 1.0.0
  **/
 console.log('Loading js/app.js');
-angular.module('app', ['ngRoute', 'angularCSS', 'app.ui', 'app.auth'])
+angular.module('app', ['ngRoute', 'angularCSS', 'app.ui', 'app.history', 'app.auth'])
 
 /**
-* App Main Controller
+* Define App Main Controller
 */
 .controller('appMainController', function ($scope, $location, $http, $window) {
   console.log("Controller App::appMainController ini");
-  
-  $scope.msg = 'Próximamente...';
   
   console.log("Controller App::appMainController end");
 })
 
 /**
-* Controller for Home Page
+* Define App Home Page Controller
 */
-.controller('appPageController', function ($scope, $location, $http) {
-  console.log("Controller App::appPageController ini");
+.controller('appHomeController', function ($scope, $location, $http) {
+  console.log("Controller App::appHomeController ini");
   
-  console.log("Controller App::appPageController end");
+  $scope.msg = 'Próximamente...';
+  
+  console.log("Controller App::appHomeController end");
 })
 
 /**
-* Controller for 404 Page
+* Define App 404 Page Controller
 */
-.controller('app404Controller', function ($scope, $location, $http) {
+.controller('app404Controller', function ($scope, $location, $http, $appHistory) {
   console.log("Controller App::app404Controller ini");
+  
+  $scope.lastPath = $appHistory.getLastHistory();
   
   console.log("Controller App::app404Controller end");
 })

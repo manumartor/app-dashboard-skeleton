@@ -7,35 +7,35 @@
 console.log('Loading js/core/ui/app-ui.module.js');
 
 /**
- * Define app-auth module
+ * Define app-ui module
  **/
 angular.module('app.ui', [])
 
 /**
- * Define provider
- **/
-
-/**
  * Define run
  **/
-.run(['$rootScope', '$timeout', function($rootScope, $timeout){
+.run(['$rootScope', '$timeout', '$appUI', function($rootScope, $timeout, $appUI){
   console.log('Module app.ui::run ini');
   
-  //hide mask after content is loaded
-  $rootScope.$on('$viewContentLoaded', function(event){ 
-    $timeout(function(){
-      $('.bgLoadingMask').hide();
-      console.log('Module app-ui::run closed bgLoadingMask on rootScope $viewContentLoaded')
-    }, 1000);
-  });
-  //show mask if route change
-  $rootScope.$on('$locationChangeStart', function (event, next, current) {
-    $('.bgLoadingMask').show();
-    console.log('Module app-ui::run open bgLoadingMask on rootScope $locationChangeStart')
-  });
-  console.log('Module app-ui::run setted bgLoadingMask close when rootScope $viewContentLoaded');
+  if ($appUI.isEnableMask()){
+    //hide mask after content is loaded
+    $rootScope.$on('$viewContentLoaded', $appUI.hideMask);
+    console.log('Module app-ui::run setted to close bgLoadingMask  when rootScope trigger $viewContentLoaded');
+    
+    //show mask if route change
+    $rootScope.$on('$locationChangeStart', $appUI.showMask);
+    console.log('Module app-ui::run setted to open bgLoadingMask  when rootScope trigger $locationChangeStart');
+  } else {
+    $appUI.hideMask();
+    console.log('Module app-ui::run hidden bgLoadingMask becouse is disabled');
+  }
   
   console.log('Module app-ui::run end');
 }]);
+
+/**
+ * Load dependecies
+ **/
+_load(['js/core/ui/app-ui.provider.js']);
 
 console.log('Loaded js/core/ui/app-ui.module.js!');

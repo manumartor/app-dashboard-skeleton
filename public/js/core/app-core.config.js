@@ -10,16 +10,18 @@
  **/
 console.log('Loading js/core/app-core.config.js');
 
-angular.module('app')
-
 /**
-* Configure the Routes
+* Define Configure
 */
-.config(['$locationProvider', '$routeProvider', '$injector', '$compileProvider', function ($locationProvider, $routeProvider, $injector, $compileProvider) {
+angular.module('app')
+.config(['$locationProvider', '$routeProvider', '$injector', '$compileProvider', '$appUIProvider', function ($locationProvider, $routeProvider, $injector, $compileProvider, $appUIProvider) {
   console.log('Module App configuring...');
   
+  //disable Mask on each page change
+  //$appUIProvider.enableMask(false);
+  
   //active Angular Debug info
-  $compileProvider.debugInfoEnabled(true);
+  //$compileProvider.debugInfoEnabled(true);
   
   //set locationProvider config
   $locationProvider.hashPrefix('!');
@@ -29,10 +31,10 @@ angular.module('app')
   $routeProvider
   .when("/", {
     templateUrl: "views/home.html", 
-    controller: "appPageController"
+    controller: "appHomeController"
   })
   .when("/404", {
-    css: '../commons/css/404.css',
+    css: 'css/404.css',
     templateUrl: "views/404.html", 
     controller: "app404Controller"})
   //set otherwise

@@ -40,6 +40,13 @@ angular.module('app.auth')
       
       console.log('Service App-auth::login end');
     };
+    
+    service.isLogged = function(){
+      console.log('Service App-auth::isLogged ini');
+      
+      console.log('Service App-auth::isLogged end');
+      return $rootScope.globals.currentUser || false;
+    };
 
     service.setCredentials = function (username, password) {
       console.log('Service App-auth::setCredentials ini');
