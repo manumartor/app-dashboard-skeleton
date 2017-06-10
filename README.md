@@ -1,4 +1,4 @@
-# webapp-daskboard-skeleton README #
+# app-daskboard-skeleton README #
 
 Plantilla base y abierta a todo el mundo para tomar como base y partida de una aplicación JQuery+Bootstrap+AngularJS completamente cross devices and cross browsers de estilo dashboard principal y gatgets o mini aplicaciones corriendo dentro de ella en forma de modulos complementarios.
 
