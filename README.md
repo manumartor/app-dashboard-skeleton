@@ -43,7 +43,7 @@ Una vez se tenga casi terminada la primera versión beta se colgará en su servi
 
 ## Issues ##
 
-Visit the [gitHub issues tracker](https://github.com/manumartor/app-dashboard-skeleton/wiki).
+Visit the [gitHub issues tracker](https://github.com/manumartor/app-dashboard-skeleton/issues).
 
 ## Author ##
 
