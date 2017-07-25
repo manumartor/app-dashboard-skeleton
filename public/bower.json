@@ -1,0 +1,21 @@
+{
+  "name": "app-desktop-skeleton",
+  "description": "Skeleton for a App Desktop style",
+  "version": "1.0.0",
+  "homepage": "https://github.com/manumartor/app-dashboard-skeleton.git",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.6.4",
+    "angular-route": "~1.6.4",
+    "angular-cookies": "~1.6.4",
+    "angular-mocks": "~1.6.4",
+    "angular-css": "^1.0.8",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "font-awesome": "^4.7.0",
+    "oclazyload": "^1.1.0",
+    "re-tree": "^0.0.2",
+    "ng-device-detector": "^4.0.3"
+  }
+}

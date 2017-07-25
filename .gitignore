@@ -3,3 +3,6 @@
 
 # -- logs 
 logs
+
+# -- sh to import from other project
+bin/importFromMaioCloudMaioman.sh
