@@ -15,12 +15,17 @@ TIMEZONE=Europe/Madrid
 # configure timezone
 timedatectl set-timezone $TIMEZONE
 
+# configure init path
+if ! grep -Fxq "cd /vagrant" /home/ubuntu/.bashrc; then
+  echo "cd /vagrant" >> /home/ubuntu/.bashrc
+fi
+
 # Update server
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
 # Install commons tools
-apt-get -y install build-essential g++ binutils-doc git
+apt-get -y install build-essential g++ binutils-doc git subversion
 
 # Install LAMP
 if $LAMP_INSTALL; then
