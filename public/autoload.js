@@ -99,7 +99,7 @@ var _load = function(files, cbk){
     try{
       //check that it's a locally file to prevent external injections
       var ini = value.substr(0, 3);
-      if (ini != '../' && ini != 'js/'){
+      if (ini != '../' && ini != 'js/' && value.substr(0, 8) != 'vendors/' && value.substr(0, 7) != 'css/'){
         throw ini + ' - Bad code injection detected. Path: ' + value;
       }
 

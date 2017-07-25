@@ -2,7 +2,7 @@
   "name": "app-desktop-skeleton",
   "private": true,
   "version": "1.0.0",
-  "description": "Skeleton for a App Desktop style",
+  "description": "Skeleton for a App Desktop project",
   "repository": "https://github.com/manumartor/app-dashboard-skeleton.git",
   "license": "MIT",
   "devDependencies": {

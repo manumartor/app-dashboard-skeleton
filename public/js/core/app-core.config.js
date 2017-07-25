@@ -1,27 +1,14 @@
 /**
- * JS for MaIOMan App Module
- *
- * To Does:
- * - Loads services dinamically (https://weblogs.asp.net/dwahlin/dynamically-loading-controllers-and-views-with-angularjs-and-requirejs)
+ * JS for MaIOMan App Config
  *
  * @author: manu.martor@gmail.com
- * @repository: https://github.com/manumartor/app-dashboard-skeleton.git
  * @version: 1.0.0
  **/
-console.log('Loading js/core/app-core.config.js');
-
-/**
-* Define Configure
-*/
-angular.module('app')
-.config(['$locationProvider', '$routeProvider', '$injector', '$compileProvider', '$appUIProvider', function ($locationProvider, $routeProvider, $injector, $compileProvider, $appUIProvider) {
-  console.log('Module App configuring...');
-  
-  //disable Mask on each page change
-  //$appUIProvider.enableMask(false);
+angular.module('app.core')
+.config(function ($locationProvider, $routeProvider, $compileProvider, $cfgAppDebug) {
   
   //active Angular Debug info
-  //$compileProvider.debugInfoEnabled(true);
+  $compileProvider.debugInfoEnabled($cfgAppDebug);
   
   //set locationProvider config
   $locationProvider.hashPrefix('!');
@@ -37,10 +24,12 @@ angular.module('app')
     css: 'css/404.css',
     templateUrl: "views/404.html", 
     controller: "app404Controller"})
+  .when("/myprofile", { 
+    templateUrl: "js/core/ui/views/myprofile.html",
+    controller: "appMyProfileController"})
+  .when("/myconfig", { 
+    templateUrl: "js/core/ui/views/myconfig.html",
+    controller: "appMyConfigController"})
   //set otherwise
   .otherwise({redirectTo: '/404'});
-  
-  console.log('Module App Configured!');
-}]);
-
-console.log('Loaded js/core/app-core.config.js!');
+});

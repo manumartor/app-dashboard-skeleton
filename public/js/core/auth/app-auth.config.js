@@ -4,14 +4,11 @@
  * @author: manu.martor@gmail.com
  * @version: 1.0.0
  **/
-console.log('Loading js/core/auth/app-auth.config.js');
 
-/**
- * Define app-auth config
- **/
 angular.module('app.auth')
-.config(['$routeProvider', function ($routeProvider) {
-  console.log('Module App-auth configuring...');
+.config(function ($routeProvider, $appLoggerProvider) {
+  $appLoggerProvider.log('App-auth::config ini');
+  
   // Set routes
   $routeProvider
   .when("/login", {
@@ -19,7 +16,6 @@ angular.module('app.auth')
     templateUrl: "js/core/auth/views/login.html", 
     controller: "loginController"
   });
-  console.log('Module App-auth configured!!');
-}]);
-
-console.log('Loaded js/core/auth/app-auth.config.js!');
+  
+  $appLoggerProvider.log('App-auth::config end');
+});

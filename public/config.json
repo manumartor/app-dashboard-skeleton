@@ -1,0 +1,31 @@
+{
+  "app_version": "1.0.0",
+  "app_name": "io.maio.appdesktopskeleton",
+  "app_title": "App Desktop Skeleton",
+  "app_ws": "http://maiocloud.martor.es/appapi/v1/",
+  
+  
+  "fs_maxSize": "2G",
+  "ui_AnimationEnable": 1,
+  "cache_enable": 1,
+  "tempCache_enable": 1,
+  "tempCache_liftTime": 60000,
+  "lang_default": "es",
+  
+  "debug": 1,
+  "logger_toConsoleEnable": 1,
+  "logger_toConsoleLevel": 3,
+  "logger_toFileEnable": 3,
+  "logger_toFileLevel": 3,
+  
+  "net_speedTestOnLoad": 0,
+  "net_serverPingTestUri": "views/blank.html",
+  "net_downloadTestUri": "js/core/net/resources/test.bin",
+  "net_uploadTestUri": "js/core/net/resources/post.php",
+  "net_changeAdvisorEnable": 1,
+  "net_changeAdvisorNotifyCloseTime": 15000,
+  
+  "ui_maskEnable": 1,
+  "ui_loadingMaskEnable": 1,
+  "ui_notifyAlertProgramateCloseDefaultTime": 10000
+}

@@ -1,12 +1,10 @@
-<div class="container app">
-  <div class="modalInfoMsg">
-    <div class="col-lg-12">
-      <h1 class="page-header">404
-        <small>Page Not Found</small>
-      </h1>
-      <p class="lead">Sorry but the page you're looking for could not be found.</p>
-      <p>Url: {{lastPath}}</p><br>
-      <p class="lead">Go to <a ng-href="#!/" title="Go to DASHBOARD"><u>DASHBOARD</u></a> and try it again.</p>
-    </div>
+<div class="modalInfoMsg">
+  <div class="col-lg-12">
+    <h1 class="page-header">404
+      <small>Page Not Found</small>
+    </h1>
+    <p class="lead">Sorry but the page you're looking for could not be found.</p>
+    <p ng-if="lastPath">Url: {{lastPath}}</p><br ng-if="lastPath">
+    <p class="lead">Go to <a ng-href="#!/" title="Go to DASHBOARD"><u>DASHBOARD</u></a> and try it again.</p>
   </div>
 </div>

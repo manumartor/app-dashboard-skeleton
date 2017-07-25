@@ -4,17 +4,16 @@
  * @author: manu.martor@gmail.com
  * @version: 1.0.0
  **/
-console.log('Loading js/core/auth/app-auth-base64.factory.js');
 
 /**
  * Define app-auth-base factory
  **/
 angular.module('app.auth')
-.factory('Base64', function () {
-  console.log('Factory App-auth::Base64 ini');
+.factory('Base64', function ($log) {
+  $log.log('App-auth::Base64 ini');
   
   var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-  console.log('Factory App-auth::Base64 end');
+  $log.log('App-auth::Base64 end');
   return {
       encode: function (input) {
           var output = "";
@@ -93,4 +92,3 @@ angular.module('app.auth')
       }
   };
 });
-console.log('Loaded js/core/auth/app-auth-base64.factory.js!');

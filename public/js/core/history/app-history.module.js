@@ -1,10 +1,9 @@
 /**
- * JS for MaIOMan App Auth Module
+ * JS for MaIOMan History Auth Module
  *
  * @author: manu.martor@gmail.com
  * @version: 1.0.0
  **/
-console.log('Loading js/core/history/app-history.module.js');
 
 /**
  * Define app-history module
@@ -12,19 +11,24 @@ console.log('Loading js/core/history/app-history.module.js');
 angular.module('app.history', [])
 
 /**
+ * Define cfg values
+ **/
+.value('$cfgAppHistoryEnable', 1)
+
+/**
  * Define run
  **/
-.run(['$rootScope', '$timeout', '$appUI', '$appHistory', function($rootScope, $timeout, $appUI, $appHistory){
-  console.log('Module app-history::run ini');
+.run(function($rootScope, $appHistory, $log){
+  $log.log('App-history::run ini');
   
-  $rootScope.$on('$locationChangeSuccess', $appHistory.setHistory);
+  if ($appHistory.isEnableHistory()){
+    $rootScope.$on('$locationChangeSuccess', $appHistory.setHistory);
+  }
   
-  console.log('Module app-history::run end');
-}]);
+  $log.log('App-history::run end');
+});
 
 /**
  * Load dependecies
  **/
-_load(['js/core/history/app-history.provider.js']);
-
-console.log('Loaded js/core/history/app-history.module.js!');
+_load(['js/core/history/app-history.factory.js']);

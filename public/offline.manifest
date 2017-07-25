@@ -1,0 +1,21 @@
+CACHE MANIFEST
+# 2017-06-14:v1
+
+# Explicitly cached entries
+index.html
+#autoload.js
+#config.json
+
+# offline.html will be displayed if the user is offline
+FALLBACK:
+/ /offline.html
+
+# IN DEVELOPMENT ENV ALL CAME FROM NETWORK
+# All other resources (e.g. sites) require the user to be online. 
+NETWORK:
+*
+
+# Additional resources to cache
+#CACHE:
+#css/404.css
+#js/*

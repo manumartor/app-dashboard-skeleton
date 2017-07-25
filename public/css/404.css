@@ -3,8 +3,17 @@
  **/
 .container.app .modalInfoMsg{
   width: 97%;
+  margin-top: 155px;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+body{
+  color: #fff;
+}
+
+a, a:hover{
+  color: #fff;
 }
