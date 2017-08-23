@@ -4,7 +4,7 @@ LAMP_INSTALL=true
 NODEJS_INSTALL=true
 COMPOSER_INSTALL=true
 PHPUNIT_INSTALL=true
-JMETER_INSTALL=true
+JMETER_INSTALL=false
 
 MYSQL_PASS=root
 MYSQL_CNF=/etc/mysql/mysql.conf.d/mysqld.cnf
@@ -12,12 +12,16 @@ PHP_XDEBUGINI=/etc/php/7.0/mods-available/xdebug.ini
 
 TIMEZONE=Europe/Madrid
 
+# set pass
+#echo "vagrant" | passwd foo --stdin
+
 # configure timezone
 timedatectl set-timezone $TIMEZONE
 
 # configure init path
 if ! grep -Fxq "cd /vagrant" /home/ubuntu/.bashrc; then
-  echo "cd /vagrant" >> /home/ubuntu/.bashrc
+  echo "cd /vagrant
+	alias l='ls -lah'" >> /home/ubuntu/.bashrc
 fi
 
 # Update server
@@ -26,6 +30,9 @@ sudo apt-get -y upgrade
 
 # Install commons tools
 apt-get -y install build-essential g++ binutils-doc git subversion
+add-apt-repository ppa:webupd8team/sublime-text-2
+apt-get update
+apt-get install sublime-text
 
 # Install LAMP
 if $LAMP_INSTALL; then
@@ -130,22 +137,30 @@ if $NODEJS_INSTALL; then
   npm install -g bower
 
   # Install gulp globally
-  #npm install -g gulp
+  npm install -g gulp
 
   # Install karma globally
-  apt-get install -y xvfb chromium-browser firefox
+  apt-get install -y xvfb xauth x11-apps chromium-browser firefox
   if ! [ -f /etc/profile.d/custom.sh ]; then
-    echo "export DISPLAY=:99.0
+    # Se recuerda que es necesario tener instalado X11 (osx: xquartz)
+    echo "#Xvfb :99 > /home/ubuntu/xvfb_output.log&
+#export DISPLAY=:99
 export CHROME_BIN=/usr/bin/chromium-browser
 export FIREFOX_BIN=/usr/bin/firefox
 
-alias app-rununittest=/vagrant/bin/rununittest.sh" > /etc/profile.d/custom.sh
+alias app-rununittest=/vagrant/bin/rununittest.sh
+alias app-rune2etest=/vagrant/bin/rune2etest.sh
+
+alias sublime-text='nohup sublime-text $1 >/dev/null 2>&1 &'" > /etc/profile.d/custom.sh
   fi
   npm install -g karma karma-cli  
   npm install -g jasmine-core jasmine-node jasmine-reporters karma-jasmine karma-chrome-launcher karma-firefox-launcher karma-coverage karma-junit-reporter
 
   # Install protractor globally
   npm install -g protractor
+  if ! [ -d "/vagrant/logs/e2etest_reports" ]; then
+    mkdir /vagrant/logs/e2etest_reports
+  fi
 
   echo "--> nodejs installed!!"
 fi
@@ -162,6 +177,9 @@ if $PHPUNIT_INSTALL; then
     wget -q https://phar.phpunit.de/phpunit.phar
     chmod +x phpunit.phar 
     mv phpunit.phar /usr/local/bin/phpunit
+  fi
+  if ! [ -d "/vagrant/logs/unittest_reports" ]; then
+    mkdir /vagrant/logs/unittest_reports
   fi
   echo "--> phpunit installed!!"
 fi

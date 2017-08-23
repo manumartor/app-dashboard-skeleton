@@ -14,13 +14,16 @@
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.1",
     "karma-jasmine": "^1.1.0",
-    "karma-junit-reporter": "^1.2.0"
+    "karma-junit-reporter": "^1.2.0",
+    "protractor": "^5.1.2"
   },
   "scripts": {
     "postinstall": "bower install",
     "postupdate": "bower update",
     "pretest": "npm install",
-    "test": "node_modules/karma/bin/karma start karma.cnf"
+    "test": "node_modules/karma/bin/karma start karma.cnf",
+    "preteste2e": "npm install",
+    "teste2e": "protractor protractor.cnf"
   },
   "dependencies": {
     "bower": "^1.8.0"
