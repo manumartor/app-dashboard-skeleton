@@ -2,8 +2,9 @@
 
 LAMP_INSTALL=true
 NODEJS_INSTALL=true
-COMPOSER_INSTALL=true
-PHPUNIT_INSTALL=true
+PHONEGAP_INSTALL=true
+COMPOSER_INSTALL=false
+PHPUNIT_INSTALL=false
 JMETER_INSTALL=false
 
 MYSQL_PASS=root
@@ -31,8 +32,8 @@ sudo apt-get -y upgrade
 # Install commons tools
 apt-get -y install build-essential g++ binutils-doc git subversion
 add-apt-repository ppa:webupd8team/sublime-text-2
-apt-get update
-apt-get install sublime-text
+apt-get -y update
+apt-get install -y sublime-text default-jre
 
 # Install LAMP
 if $LAMP_INSTALL; then
@@ -165,6 +166,20 @@ alias sublime-text='nohup sublime-text $1 >/dev/null 2>&1 &'" > /etc/profile.d/c
   echo "--> nodejs installed!!"
 fi
 
+# Install phonegap
+if $PHONEGAP_INSTALL; then
+  npm install -g phonegap
+
+  wget http://dl.google.com/android/android-sdk_r24.2-linux.tgz
+  tar -xvf android-sdk_r24.2-linux.tgz
+  cd android-sdk-linux/tools
+  yes | ./android update sdk --no-ui
+  echo "export PATH=${PATH}:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools
+export ANDROID_HOME=~/android-sdk-linux" >> /home/ubuntu/.bashrc
+
+  echo "--> phonegao installed!!"
+fi
+
 # Install composer
 if $COMPOSER_INSTALL; then 
   apt-get install -y composer
@@ -187,7 +202,6 @@ fi
 # Install jmeter
 if $JMETER_INSTALL; then
   if ! [ -d /usr/local/lib/apache-jmeter ]; then
-    apt-get install -y default-jre
     wget -q http://redrockdigimark.com/apachemirror/jmeter/binaries/apache-jmeter-3.1.tgz
     tar -xf apache-jmeter-3.1.tgz
     mv apache-jmeter-3.1/ /usr/local/lib/apache-jmeter
