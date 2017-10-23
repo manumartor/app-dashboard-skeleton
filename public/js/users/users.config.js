@@ -5,13 +5,13 @@
  * @version: 1.0.0
  **/
 angular.module('users')
+
 .config(function ($routeProvider) {
   
-  //set routes
-  $routeProvider
-  .when("/users", {
-    templateUrl: "js/users/views/users.html", 
-    controller: "appUsersIniController"
-  });
-  
+	//set routes
+  	$routeProvider.when("/users", {
+	    templateUrl: "js/users/views/users.html", 
+	    controller: "usersIniController"
+	});
+
 });

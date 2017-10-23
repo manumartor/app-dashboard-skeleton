@@ -6,24 +6,12 @@
  **/
 
 angular.module('users', [])
-.config(function ($routeProvider) {
-  
-  //set routes
-  $routeProvider
-  .when("/users", {
-    templateUrl: "js/users/views/users.html", 
-    controller: "usersIniController"
-  });
-  
-})
-.run(function($compile, $window, $log){
+
+.run(function($compile, $window, $log, $appUI){
   $log.log('Users::run ini');
   
   //add icon component to dashboard
-  $('.container.contens').append('<div class="dashboardIconLayer users"><a href="#!/users">Hola</a></div>');
-  
-  //add window component to .container.content
-  $('.container.contens').append('<div class="desktopWinLayer users"><post-link-directive></post-link-directive></div>');
+  $appUI.desktop.addIcon('Listado de usuarios registrados', 'img', '/users');
   
   $log.log('Users::run end');
 });
@@ -32,5 +20,6 @@ angular.module('users', [])
  * Load dependecies
  **/
 _load([
+  'js/users/users.config.js',
   'js/users/users.controllers.js'
 ]);

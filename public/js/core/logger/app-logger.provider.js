@@ -6,6 +6,7 @@
  **/
 
 angular.module('app.logger')
+
 .provider('$appLogger', function($logProvider){
   var $this = this,
       logs = [],

@@ -20,10 +20,11 @@ body{
 
 .container.contens{
   width: 100%;
+  height: 80%;
   padding: 10px;
 }
 .container.contens a, .container.contens a:hover{
-  color: #fff; 
+  color: #000; 
 }
 
 .container.commingsoon{
@@ -76,25 +77,23 @@ body{
   z-index: 1;
 }
 
+
 /**
  * Desktop aplications styles
  **/
-.ngViewLayer{
-  /*display: none;*/
-}
-.dashboardIconLayer{
+
+ /* Desktop Layer */
+.desktopLayer{
   display: block;
-  width: 100px;
-  height: 200px;
-  background-color: #fff;
-  -moz-box-shadow: 0 0 10px #ccc; 
-  -webkit-box-shadow: 0 0 10px #ccc; 
-  box-shadow: 0 0 10px #ccc;
+  width: 100%;
+  height: 100%;
 }
 
-.desktopWinLayer{
-  position: absolute;
-  bottom: 15px;
+/* Window Layer */
+.windowLayerStyle{
+  position: absolute !important;
+  top: 80px;
+  left: 250px;
   display: block;
   width: 400px;
   height: 100px;
@@ -103,18 +102,62 @@ body{
   -webkit-box-shadow: 0 0 10px #ccc; 
   box-shadow: 0 0 10px #ccc;
 }
-.dashboardIconLayer:hover, .desktopWinLayer:hover{
+.windowLayerStyleFullscreen{
+  top: 80px;
+  left: 15px;
+  width: 98%;
+  height: 70%;
+}
+.windowLayerStyleFullscreen div:first-child{
+  width: 100%;
+  height: 100%;
+}
+.ui-resizable-helper { border: 1px dotted gray; }
+
+/* Desktop modules/apps icons layer */
+.desktopAppIconLayer{
+  display: inline-block;
+  width: 100px;
+  height: 125px;
+  margin: 5px;
+  padding: 5px;
+  background-color: #fff;
+  -moz-box-shadow: 0 0 10px #ccc; 
+  -webkit-box-shadow: 0 0 10px #ccc; 
+  box-shadow: 0 0 10px #ccc;
+  color: #000;
+}
+
+/* resaltar capa cuando se esta encima*/
+.desktopAppIconLayer:hover, .windowLayerStyle:hover{
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.57); 
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.57); 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.57);
 }
-.desktopWinLayer a{
-  display: block;
-  width: 100%;
-  height: 100%;
+
+.desktopAppIconLayer a, .desktopAppIconLayer a:hover{
   color: #000;
 }
+.desktopAppIconLayer a div{
+  width: 100%;
+  height: 100%;
+}
 
+
+.closeIcon{
+  position: absolute;;
+  top: -5px;
+  right: -4px;
+}
+.closeIcon img{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.closeIcon img:hover{
+  width: 21px;
+  height: 21px;
+}
 /**
  * Define effects
  **/

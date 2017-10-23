@@ -16,17 +16,18 @@
  **/
 angular.module('app', ['app.core', 'app.logger', 'app.config', 'app.net', 'app.ui', 'app.history', 'app.auth'])
 
-.directive('postLinkDirective', function($compile) {
+/*.directive('postLinkDirective', function($compile) {
   return {
     // REMEMBER, link is called AFTER nested elements have been compiled and linked!
     link: function(scope) {
           alert('hola');
           scope.msg = 'Hola';
-          $('.desktopWinLayer.users').html($('.ngViewLayer').html());
+          $('.desktopWinLayer.users').html($('.windowLayer').html());
           return scope; 
     }
   }
-})
+})*/
+
 /**
  * Run module
  **/

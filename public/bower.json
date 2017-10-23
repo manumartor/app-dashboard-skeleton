@@ -16,6 +16,7 @@
     "font-awesome": "^4.7.0",
     "oclazyload": "^1.1.0",
     "re-tree": "^0.0.2",
-    "ng-device-detector": "^4.0.3"
+    "ng-device-detector": "^4.0.3",
+    "jquery-ui": "^1.12.1"
   }
 }

@@ -10,6 +10,8 @@ $(document).ready(function(){
   
   //load external libraries (bootstrap, angular, font-awesome)
   _load([
+    'vendors/jquery-ui/jquery-ui.min.js',
+    'vendors/jquery-ui/themes/base/jquery-ui.min.css',
     'vendors/bootstrap/dist/js/bootstrap.min.js',
     'vendors/font-awesome/css/font-awesome.min.css',
     'vendors/angular/angular.js'

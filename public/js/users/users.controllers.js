@@ -13,7 +13,7 @@ angular.module('users')
   $log.log("Users::usersIniController ini");
   
   //alert('users controller');
-  //$('.desktopWinLayer.users').html($('.ngViewLayer').html());
+  //$('.desktopWinLayer.users').html($('.windowLayer').html());
   
   $log.info("Users::usersIniController end");
 })

@@ -13,10 +13,18 @@
 <body>
 	<div class="container app">
 		<header-layer/></header-layer>
-		<div class="container contens"><div class="ngViewLayer" ng-view></div></div>
+		<div class="container contens">
+			<div class="desktopLayer"></div>
+			<div class="windowLayer windowLayerStyle"><div ng-view></div></div>
+		</div>
 		<footer-layer/></footer-layer>
 	</div>
-	<div class="bgLoadingMask"></div><div class="LoadingMaskContainer"><div class="loadingMask text-center alert alert-danger blink">Loading...</div></div>
+
+	<div class="bgLoadingMask"></div>
+	<div class="LoadingMaskContainer">
+		<div class="loadingMask text-center alert alert-danger blink">Loading...</div>
+	</div>
+	
 	<script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="autoload.js"></script>
 </body>

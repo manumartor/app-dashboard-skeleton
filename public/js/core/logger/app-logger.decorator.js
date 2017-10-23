@@ -9,6 +9,7 @@
  * Define app-logger decorator
  **/
 angular.module('app.logger')
+
 .decorator('$log', function($delegate, $appLogger) {
   $appLogger.log('App-logger::$log ini');
 

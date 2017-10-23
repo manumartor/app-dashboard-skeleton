@@ -9,10 +9,12 @@ angular.module('app.ui')
 /**
 * Define App Home Page Controller
 */
-.controller('appHomeController', function ($rootScope, $scope, $log) {
+.controller('appHomeController', function ($rootScope, $scope, $timeout, $log, $appUI) {
   $log.log("App-ui::appHomeController ini");
-  
-  $scope.msg = 'Próximamente...';
+  $appUI.windowLayer.show();
+  $appUI.windowLayer.fullscreenOut('.windowLayer');
+
+  $scope.msg = 'Bienvenido a la App Web/Mobile Dashboard Skeleton';
   
   $log.info("App-ui::appHomeController end");
 })
@@ -61,11 +63,15 @@ angular.module('app.ui')
 /**
 * Define App 404 Page Controller
 */
-.controller('app404Controller', function ($scope, $appHistory, $log) {
+.controller('app404Controller', function ($scope, $appHistory, $log, $appUI) {
   $log.log("App-ui::app404Controller ini");
+  $appUI.windowLayer.show();
+  $appUI.windowLayer.fullscreenIn('.windowLayer');
   
   $scope.lastPath = $appHistory.getLastHistory();
   $log.error('App-ui::app404Controller path not found.' + ($scope.lastPath != null? ' Path: ' + $scope.lastPath: ''));
+
+
   
   $log.info("App-ui::app404Controller end");
 })
