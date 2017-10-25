@@ -11,8 +11,9 @@ angular.module('app.ui')
 */
 .controller('appHomeController', function ($rootScope, $scope, $timeout, $log, appUI) {
   $log.log("App-ui::appHomeController ini");
-  appUI.windowLayer.show();
   appUI.windowLayer.fullscreenOut('.windowLayer');
+  appUI.windowLayer.moveTopCenter();
+  appUI.windowLayer.show();
 
   $scope.msg = 'Bienvenido a la App Web/Mobile Dashboard Skeleton';
   
@@ -65,6 +66,7 @@ angular.module('app.ui')
 */
 .controller('app404Controller', function ($scope, appHistory, $log, appUI) {
   $log.log("App-ui::app404Controller ini");
+  appUI.windowLayer.moveTopLeft();
   appUI.windowLayer.show();
   appUI.windowLayer.fullscreenIn('.windowLayer');
   
