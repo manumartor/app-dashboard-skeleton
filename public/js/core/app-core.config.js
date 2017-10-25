@@ -5,10 +5,10 @@
  * @version: 1.0.0
  **/
 angular.module('app.core')
-.config(function ($locationProvider, $routeProvider, $compileProvider, $cfgAppDebug) {
+.config(function ($locationProvider, $routeProvider, $compileProvider, cfgAppDebug) {
   
   //active Angular Debug info
-  $compileProvider.debugInfoEnabled($cfgAppDebug);
+  $compileProvider.debugInfoEnabled(cfgAppDebug);
   
   //set locationProvider config
   $locationProvider.hashPrefix('!');

@@ -9,8 +9,8 @@
  * Define provider
  **/
 angular.module('app.auth')
-.factory("$appAuth", function (Base64, $http, $cookieStore, $rootScope, $timeout, $log) {
-  $log.log('App-auth::$appAuth ini');
+.factory("appAuth", function (Base64, $http, $cookieStore, $rootScope, $timeout, $log) {
+  $log.log('App-auth::appAuth ini');
 
   var service = {};
   service.login = function (email, password, callback) {
@@ -72,6 +72,6 @@ angular.module('app.auth')
     $log.info('App-auth::clearCredentials end');
   };
 
-  $log.log('App-auth::$appAuth end');
+  $log.log('App-auth::appAuth end');
   return service;
 });

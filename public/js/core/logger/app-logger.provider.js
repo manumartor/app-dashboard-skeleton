@@ -16,7 +16,7 @@ angular.module('app.logger')
   /**
    * Define $appLogger factory
    **/
-  this.$get = function($filter, LOGGER_LEVEL_ERROR, $cfgAppLoggerToConsoleEnable, $cfgAppLoggerToConsoleLevel, $cfgAppLoggerToFileEnable, $cfgAppLoggerToFileLevel) {
+  this.$get = function($filter, LOGGER_LEVEL_ERROR, cfgAppLoggerToConsoleEnable, cfgAppLoggerToConsoleLevel, cfgAppLoggerToFileEnable, cfgAppLoggerToFileLevel) {
 
     var service = {
       error: function() {
@@ -44,25 +44,25 @@ angular.module('app.logger')
         //load logger_toConsoleEnable
         var loggerToConsoleEnable = _$CFG['logger_toConsoleEnable'];
         if (typeof loggerToConsoleEnable != 'undefined'){
-          $cfgAppLoggerToConsoleEnable = loggerToConsoleEnable;
+          cfgAppLoggerToConsoleEnable = loggerToConsoleEnable;
         }
 
         //load logger_toConsoleLevel
         var loggerToConsoleLevel = _$CFG['logger_toConsoleLevel'];
         if (typeof loggerToConsoleLevel != 'undefined'){
-          $cfgAppLoggerToConsoleLevel = loggerToConsoleLevel;
+          cfgAppLoggerToConsoleLevel = loggerToConsoleLevel;
         }
 
         //load logger_toFileEnable
         var loggerToFileEnable = _$CFG['logger_toFileEnable'];
         if (typeof loggerToFileEnable != 'undefined'){
-          $cfgAppLoggerToFileEnable = loggerToFileEnable;
+          cfgAppLoggerToFileEnable = loggerToFileEnable;
         }
 
         //load logger_toFileLevel
         var loggerToFileLevel = _$CFG['logger_toFileLevel'];
         if (typeof loggerToFileLevel != 'undefined'){
-          $cfgAppLoggerToFileLevel = loggerToFileLevel;
+          cfgAppLoggerToFileLevel = loggerToFileLevel;
         }
       }
     };
@@ -100,13 +100,13 @@ angular.module('app.logger')
       var msg = '[' + logItem.time + '][' + logItem.type.toString().toUpperCase() + '] ' + logItem.message.toString();
 
       //check if must be printent to console
-      if ($cfgAppLoggerToConsoleEnable && level <= $cfgAppLoggerToConsoleLevel){
+      if (cfgAppLoggerToConsoleEnable && level <= cfgAppLoggerToConsoleLevel){
         //if here it 1st time that print check if there are previouse loged messages
         if (!printingToConsole){
           if (logs.length > 1){
             for (var i = 0; i < logs.length - 1; i++){
               var _logItem = logs[i];
-              if (_logItem.level <= $cfgAppLoggerToConsoleLevel){
+              if (_logItem.level <= cfgAppLoggerToConsoleLevel){
                 console[_logItem.type]('[' + _logItem.time + '][' + _logItem.type.toString().toUpperCase() + '] ' + _logItem.message.toString());
               }
             }
@@ -119,13 +119,13 @@ angular.module('app.logger')
       }
 
       //check if must be writted to file
-      if ($cfgAppLoggerToFileEnable && level <= $cfgAppLoggerToFileLevel){
+      if (cfgAppLoggerToFileEnable && level <= cfgAppLoggerToFileLevel){
         //if here it 1st time that print check if there are previouse loged messages
         if (!printingToFile){
           if (logs.length > 1){
             for (var i = 0; i < logs.length - 1; i++){
               var _logItem = logs[i];
-              if (_logItem.level <= $cfgAppLoggerToFileLevel){
+              if (_logItem.level <= cfgAppLoggerToFileLevel){
                 //console.log('[' + _logItem.time + '][' + _logItem.type.toString().toUpperCase() + '] ' + _logItem.message.toString());
               }
             }

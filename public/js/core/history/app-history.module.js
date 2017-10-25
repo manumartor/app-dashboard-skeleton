@@ -13,16 +13,16 @@ angular.module('app.history', [])
 /**
  * Define cfg values
  **/
-.value('$cfgAppHistoryEnable', 1)
+.value('cfgAppHistoryEnable', 1)
 
 /**
  * Define run
  **/
-.run(function($rootScope, $appHistory, $log){
+.run(function($rootScope, $log, appHistory){
   $log.log('App-history::run ini');
   
-  if ($appHistory.isEnableHistory()){
-    $rootScope.$on('$locationChangeSuccess', $appHistory.setHistory);
+  if (appHistory.isEnableHistory()){
+    $rootScope.$on('$locationChangeSuccess', appHistory.setHistory);
   }
   
   $log.log('App-history::run end');

@@ -22,21 +22,21 @@ angular.module('app.ui')
 /**
 * Define headerLayerController
 */
-.controller('headerLayerController', function ($window, $scope, $rootScope, $log, $location, $appAuth, appUI) {
+.controller('headerLayerController', function ($window, $scope, $rootScope, $log, $location, appAuth, appUI) {
   $log.log("App-ui::headerLayerController ini");
   
   //expose isLogged to scope to show profile picture or not
-  $scope.isLogged = $appAuth.isLogged();
+  $scope.isLogged = appAuth.isLogged();
   
   //bind show user profile image to log on
-  $rootScope.$on('$appAuthLoginOK', function(){
-    $scope.isLogged = $appAuth.isLogged();
+  $rootScope.$on('appAuthLoginOK', function(){
+    $scope.isLogged = appAuth.isLogged();
     $rootScope.$emit('$appHeaderViewLoaded');
   });
   
   //bind hidden user profile to image to login off
-  $rootScope.$on('$appAuthLoginKO', function(){
-    $scope.isLogged = $appAuth.isLogged();
+  $rootScope.$on('appAuthLoginKO', function(){
+    $scope.isLogged = appAuth.isLogged();
   });
   
   //bind logout link to ask is sure to log outer
@@ -63,12 +63,12 @@ angular.module('app.ui')
 /**
 * Define App 404 Page Controller
 */
-.controller('app404Controller', function ($scope, $appHistory, $log, appUI) {
+.controller('app404Controller', function ($scope, appHistory, $log, appUI) {
   $log.log("App-ui::app404Controller ini");
   appUI.windowLayer.show();
   appUI.windowLayer.fullscreenIn('.windowLayer');
   
-  $scope.lastPath = $appHistory.getLastHistory();
+  $scope.lastPath = appHistory.getLastHistory();
   $log.error('App-ui::app404Controller path not found.' + ($scope.lastPath != null? ' Path: ' + $scope.lastPath: ''));
 
 
@@ -79,7 +79,7 @@ angular.module('app.ui')
 /**
 * Define App 404 Page Controller
 */
-.controller('appMyProfileController', function ($scope, $appHistory, $log) {
+.controller('appMyProfileController', function ($scope, $log, appHistory) {
   $log.log("App-ui::appMyProfileController ini");
   
   $log.info("App-ui::appMyProfileController end");
@@ -88,7 +88,7 @@ angular.module('app.ui')
 /**
 * Define App 404 Page Controller
 */
-.controller('appMyConfigController', function ($scope, $appHistory, $log) {
+.controller('appMyConfigController', function ($scope, appHistory, $log) {
   $log.log("App-ui::appMyConfigController ini");
   
   $log.info("App-ui::app404Controller end");

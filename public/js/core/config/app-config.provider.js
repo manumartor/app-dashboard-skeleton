@@ -6,7 +6,7 @@
  **/
 
 angular.module('app.config')
-.provider('appCfg', function($appLoggerProvider, $cfgAppLoggerToConsoleEnable, $cfgAppLoggerToFileEnable, $cfgAppLoggerToConsoleLevel, $cfgAppLoggerToFileLevel){
+.provider('appCfg', function($appLoggerProvider, cfgAppLoggerToConsoleEnable, cfgAppLoggerToFileEnable, cfgAppLoggerToConsoleLevel, cfgAppLoggerToFileLevel){
   $appLoggerProvider.log('App-config::appCfgProvider ini');
   
   //at this point the $CFG var is defined in the global scope

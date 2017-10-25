@@ -17,16 +17,16 @@ angular.module('app.ui', [])
     $log.log('App.ui::run ini');
   
   //set ui loading Mask
-  if (appUI.isLoadingMaskEnable()){
+  if (appUI.mask.isLoadingEnable()){
       //hide mask after content is loaded
       $rootScope.$on('$viewContentLoaded', function() { 
-          appUI.hideMask();
+          appUI.mask.hide();
       });
       $log.log('App-ui::run setted to close bgLoadingMask  when rootScope trigger $viewContentLoaded');
     
       //show mask if route change
       $rootScope.$on('$locationChangeStart', function() {
-        appUI.showLoadingMask();
+          appUI.mask.showLoading();
       });
       $log.log('App-ui::run setted to open bgLoadingMask  when rootScope trigger $locationChangeStart');
     
@@ -35,7 +35,7 @@ angular.module('app.ui', [])
         //alert('yeee');
       });
   } else {
-      appUI.hideMask();
+      appUI.mask.hide();
       $log.log('App-ui::run hidden bgLoadingMask becouse is disabled');
   }
 

@@ -13,14 +13,14 @@ angular.module('app.config', [])
 /**
  * Define run
  **/
-.run(function($log, $appLogger, appCfg, $cfgAppLoggerToConsoleEnable, $cfgAppLoggerToConsoleLevel, $cfgAppLoggerToFileEnable, $cfgAppLoggerToFileLevel){
+.run(function($log, $appLogger, appCfg, cfgAppLoggerToConsoleEnable, cfgAppLoggerToConsoleLevel, cfgAppLoggerToFileEnable, cfgAppLoggerToFileLevel){
   $log.log('App-config::run ini');
   
   $appLogger.reloadCfg({
-    "logger_toConsoleEnable": appCfg.getCfg('logger_toConsoleEnable', $cfgAppLoggerToConsoleEnable),
-    "logger_toConsoleLevel": appCfg.getCfg('logger_toConsoleLevel', $cfgAppLoggerToConsoleLevel),
-    "logger_toFileEnable": appCfg.getCfg('logger_toFileEnable', $cfgAppLoggerToFileEnable),
-    "logger_toFileLevel": appCfg.getCfg('logger_toFileLevel', $cfgAppLoggerToFileLevel)
+    "logger_toConsoleEnable": appCfg.getCfg('logger_toConsoleEnable', cfgAppLoggerToConsoleEnable),
+    "logger_toConsoleLevel": appCfg.getCfg('logger_toConsoleLevel', cfgAppLoggerToConsoleLevel),
+    "logger_toFileEnable": appCfg.getCfg('logger_toFileEnable', cfgAppLoggerToFileEnable),
+    "logger_toFileLevel": appCfg.getCfg('logger_toFileLevel', cfgAppLoggerToFileLevel)
   });
   
   $log.log('App-config::run end');

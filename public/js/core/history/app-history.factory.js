@@ -6,11 +6,12 @@
  **/
 
 /**
- * Define $apphistoryProvider provider
+ * Define appHistoryProvider provider
  **/
 angular.module('app.history')
-.factory('$appHistory', function(appCfg, $cfgAppHistoryEnable, $log){
-  $log.log('App-history::$appHistory ini');
+
+.factory('appHistory', function($log, appCfg, cfgAppHistoryEnable){
+  $log.log('App-history::appHistory ini');
 
   //ini vars
   var history = [],
@@ -47,7 +48,7 @@ angular.module('app.history')
 
     //return isEnableHistory
     $log.log('App-history::isEnableHistory end');
-    return appCfg.getCfg('history_enable', $cfgAppHistoryEnable);
+    return appCfg.getCfg('history_enable', cfgAppHistoryEnable);
   };
 
   /**
@@ -57,11 +58,11 @@ angular.module('app.history')
     $log.log('App-history::setEnableHistory ini');
 
     //set enableHistory to flag
-    $cfgAppHistoryEnable = flag;
+    cfgAppHistoryEnable = flag;
 
     $log.log('App-history::setEnableHistory end');
   };
 
-  $log.log('App-history::$appHistory end');
+  $log.log('App-history::appHistory end');
   return services;
 });

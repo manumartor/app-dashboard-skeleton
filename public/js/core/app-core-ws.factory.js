@@ -6,7 +6,7 @@
  **/
 
 angular.module('app.core')
-.factory('$appCoreWS', function($log, $cfgAppWsInternal){
+.factory('$appCoreWS', function($log, cfgAppWsInternal){
   $log.log('App-core::$appCoreWS ini');
 
   var services = {};
@@ -18,7 +18,7 @@ angular.module('app.core')
     $log.log('App-core::call ini');
     
     //it its internal ws cfg
-    if ($cfgAppWsInternal){
+    if (cfgAppWsInternal){
       services.internalCall()
       $log.log('App-core::call end');
       return;

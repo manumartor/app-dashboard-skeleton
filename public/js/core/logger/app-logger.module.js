@@ -17,11 +17,11 @@ angular.module('app.logger', [])
 /**
  * Define config
  **/
-.config(function($logProvider, $appLoggerProvider, $cfgAppDebug) {
+.config(function($logProvider, $appLoggerProvider, cfgAppDebug) {
   $appLoggerProvider.log('App-logger::config ini');  
   
   //enable log
-  $logProvider.debugEnabled($cfgAppDebug);
+  $logProvider.debugEnabled(cfgAppDebug);
   
   $appLoggerProvider.log('App-logger::config end');
 });

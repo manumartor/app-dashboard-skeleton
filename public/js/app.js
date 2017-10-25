@@ -31,13 +31,13 @@ angular.module('app', ['app.core', 'app.logger', 'app.config', 'app.net', 'app.u
 /**
  * Run module
  **/
-.run(function($injector, $route, $log, $window, $rootScope, $ocLazyLoad, $timeout, appUI, appCfg, $appAuth, $location){
+.run(function($injector, $route, $log, $window, $rootScope, $ocLazyLoad, $timeout, appUI, appCfg, appAuth, $location){
   $log.log('App::run ini');
   
   //say hellow to user
-  if ($appAuth.isLogged()){
+  if (appAuth.isLogged()){
     $timeout(function(){
-      appUI.showNotifyAlert({
+      appUI.mask.showNotifyAlert({
         text: 'Welcome to ' + appCfg.getCfg('app_title') + '!!!',
         timeout: 5000
       });
@@ -48,7 +48,7 @@ angular.module('app', ['app.core', 'app.logger', 'app.config', 'app.net', 'app.u
   var modulesLoaded = false;
   $rootScope.$on('$locationChangeStart', function(){
     //check user auth and if funct modules are loaded
-    if ($appAuth.isLogged() && !modulesLoaded){
+    if (appAuth.isLogged() && !modulesLoaded){
       var path = $location.path();
       $ocLazyLoad.load('js/users/users.module.js')
       .then(function(){
