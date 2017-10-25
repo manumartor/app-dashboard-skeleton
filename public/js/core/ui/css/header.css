@@ -9,6 +9,9 @@
   -webkit-box-shadow: 5px 5px 5px 0px rgba(216, 75, 44, 0.57);
   -moz-box-shadow: 5px 5px 5px 0px rgba(216, 75, 44, 0.57);
   box-shadow: 5px 5px 5px 0px rgba(216, 75, 44, 0.57);
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .userProfileLayer{
   float: right;

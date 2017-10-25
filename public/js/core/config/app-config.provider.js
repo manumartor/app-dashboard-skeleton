@@ -6,8 +6,8 @@
  **/
 
 angular.module('app.config')
-.provider('$appCfg', function($appLoggerProvider, $cfgAppLoggerToConsoleEnable, $cfgAppLoggerToFileEnable, $cfgAppLoggerToConsoleLevel, $cfgAppLoggerToFileLevel){
-  $appLoggerProvider.log('App-config::$appCfgProvider ini');
+.provider('appCfg', function($appLoggerProvider, $cfgAppLoggerToConsoleEnable, $cfgAppLoggerToFileEnable, $cfgAppLoggerToConsoleLevel, $cfgAppLoggerToFileLevel){
+  $appLoggerProvider.log('App-config::appCfgProvider ini');
   
   //at this point the $CFG var is defined in the global scope
   //so we have to search for a solution to get it in side andular for major security
@@ -31,10 +31,10 @@ angular.module('app.config')
   }; 
   
   /**
-   * Define $appCfg factory
+   * Define appCfg factory
    **/
   this.$get = function($log){
-    $log.log('App-config::$appCfg ini'); 
+    $log.log('App-config::appCfg ini'); 
     
     var _services = {};
     /**
@@ -77,9 +77,9 @@ angular.module('app.config')
       return _val;
     };
     
-    $log.log('App-config::$appCfg end');
+    $log.log('App-config::appCfg end');
     return _services;
   };
   
-  $appLoggerProvider.log('App-config::$appCfgProvider end');
+  $appLoggerProvider.log('App-config::appCfgProvider end');
 });

@@ -9,10 +9,10 @@ angular.module('app.ui')
 /**
 * Define App Home Page Controller
 */
-.controller('appHomeController', function ($rootScope, $scope, $timeout, $log, $appUI) {
+.controller('appHomeController', function ($rootScope, $scope, $timeout, $log, appUI) {
   $log.log("App-ui::appHomeController ini");
-  $appUI.windowLayer.show();
-  $appUI.windowLayer.fullscreenOut('.windowLayer');
+  appUI.windowLayer.show();
+  appUI.windowLayer.fullscreenOut('.windowLayer');
 
   $scope.msg = 'Bienvenido a la App Web/Mobile Dashboard Skeleton';
   
@@ -22,7 +22,7 @@ angular.module('app.ui')
 /**
 * Define headerLayerController
 */
-.controller('headerLayerController', function ($window, $scope, $rootScope, $log, $location, $appAuth, $appUI) {
+.controller('headerLayerController', function ($window, $scope, $rootScope, $log, $location, $appAuth, appUI) {
   $log.log("App-ui::headerLayerController ini");
   
   //expose isLogged to scope to show profile picture or not
@@ -63,10 +63,10 @@ angular.module('app.ui')
 /**
 * Define App 404 Page Controller
 */
-.controller('app404Controller', function ($scope, $appHistory, $log, $appUI) {
+.controller('app404Controller', function ($scope, $appHistory, $log, appUI) {
   $log.log("App-ui::app404Controller ini");
-  $appUI.windowLayer.show();
-  $appUI.windowLayer.fullscreenIn('.windowLayer');
+  appUI.windowLayer.show();
+  appUI.windowLayer.fullscreenIn('.windowLayer');
   
   $scope.lastPath = $appHistory.getLastHistory();
   $log.error('App-ui::app404Controller path not found.' + ($scope.lastPath != null? ' Path: ' + $scope.lastPath: ''));

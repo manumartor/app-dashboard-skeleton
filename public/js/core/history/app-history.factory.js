@@ -9,7 +9,7 @@
  * Define $apphistoryProvider provider
  **/
 angular.module('app.history')
-.factory('$appHistory', function($appCfg, $cfgAppHistoryEnable, $log){
+.factory('$appHistory', function(appCfg, $cfgAppHistoryEnable, $log){
   $log.log('App-history::$appHistory ini');
 
   //ini vars
@@ -47,7 +47,7 @@ angular.module('app.history')
 
     //return isEnableHistory
     $log.log('App-history::isEnableHistory end');
-    return $appCfg.getCfg('history_enable', $cfgAppHistoryEnable);
+    return appCfg.getCfg('history_enable', $cfgAppHistoryEnable);
   };
 
   /**

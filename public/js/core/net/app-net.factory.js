@@ -6,7 +6,7 @@
  **/
 
 angular.module('app.net')
-.factory('$appNet', function($log, $http, $appCfg, $cfgAppNetIsSrvUpTimeout, $cfgAppNetServerPingTestUri, $cfgAppNetDownloadTestUri, $cfgAppNetUploadTestUri){
+.factory('$appNet', function($log, $http, appCfg, $cfgAppNetIsSrvUpTimeout, $cfgAppNetServerPingTestUri, $cfgAppNetDownloadTestUri, $cfgAppNetUploadTestUri){
   $log.log('App-core::$appNet ini');
 
   var services = {};
@@ -40,7 +40,7 @@ angular.module('app.net')
     
     //2. head to blank.html file
     var start = new Date().getTime();
-    var url = $appCfg.getCfg('net_serverPingTestUri', $cfgAppNetServerPingTestUri);
+    var url = appCfg.getCfg('net_serverPingTestUri', $cfgAppNetServerPingTestUri);
     $http.head(url, {
       headers: {'Content-type': 'application/octet-stream'},
       cache: 0,
@@ -110,7 +110,7 @@ angular.module('app.net')
     
     //2. download big bin file
     var start = new Date().getTime();
-    var url = $appCfg.getCfg('net_downloadTestUri', $cfgAppNetDownloadTestUri) + '?id=' + start;
+    var url = appCfg.getCfg('net_downloadTestUri', $cfgAppNetDownloadTestUri) + '?id=' + start;
     $http.get(url, {
       headers: {'Content-type': 'application/octet-stream'},
       cache: 0
@@ -159,7 +159,7 @@ angular.module('app.net')
     
     //3. download big bin file
     var start = new Date().getTime();
-    var url = $appCfg.getCfg('net_uploadTestUri', $cfgAppNetUploadTestUri) + '?id=' + start;
+    var url = appCfg.getCfg('net_uploadTestUri', $cfgAppNetUploadTestUri) + '?id=' + start;
     $http.post(url, {
       data: uploadData,
       headers: {'Content-type': 'application/octet-stream'},

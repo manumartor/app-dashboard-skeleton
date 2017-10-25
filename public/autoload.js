@@ -54,8 +54,8 @@ $(document).ready(function(){
             });
             
             //set config
-            angular.module('app.config').config(function($appCfgProvider){
-              $appCfgProvider.loadCfg(response);
+            angular.module('app.config').config(function(appCfgProvider){
+              appCfgProvider.loadCfg(response);
             });
             
             //launch app

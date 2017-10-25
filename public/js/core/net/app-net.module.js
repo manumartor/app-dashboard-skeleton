@@ -17,7 +17,7 @@ angular.module('app.net', [])
 /**
  * Define run
  **/
-.run(function($log, $appNet, $window, $rootScope, $appCfg, $cfgAppNetSpeedTestOnLoad){
+.run(function($log, $appNet, $window, $rootScope, appCfg, $cfgAppNetSpeedTestOnLoad){
   $log.log('Module app-net::run ini');
   
   //log network status
@@ -27,7 +27,7 @@ angular.module('app.net', [])
     $log.info('Module app-net::run server is: ' + (timeResponse !== false) + '. Time: ' + timeResponse + 'ms. in response');
   });
   //log network bandwidth
-  if ($appCfg.getCfg('net_speedTestOnLoad', $cfgAppNetSpeedTestOnLoad)){
+  if (appCfg.getCfg('net_speedTestOnLoad', $cfgAppNetSpeedTestOnLoad)){
     $appNet.testSpeed(function(response){
       if (!response){
         $log.info('Module app-net::run downloadTest fails!');  

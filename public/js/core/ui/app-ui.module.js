@@ -13,49 +13,55 @@ angular.module('app.ui', [])
 /**
  * Define run
  **/
-.run(function($rootScope, $location, $timeout, $appUI, $log){
-  $log.log('App.ui::run ini');
+.run(function($rootScope, $location, $timeout, $log, appUI){
+    $log.log('App.ui::run ini');
   
   //set ui loading Mask
-  if ($appUI.isLoadingMaskEnable()){
-    //hide mask after content is loaded
-    $rootScope.$on('$viewContentLoaded', function() { 
-      $appUI.hideMask();
-      $appUI.windowLayer.clone($location.path());
-    });
-    $log.log('App-ui::run setted to close bgLoadingMask  when rootScope trigger $viewContentLoaded');
+  if (appUI.isLoadingMaskEnable()){
+      //hide mask after content is loaded
+      $rootScope.$on('$viewContentLoaded', function() { 
+          appUI.hideMask();
+      });
+      $log.log('App-ui::run setted to close bgLoadingMask  when rootScope trigger $viewContentLoaded');
     
-    //show mask if route change
-    $rootScope.$on('$locationChangeStart', function() {
-      $appUI.showLoadingMask();
-    });
-    $log.log('App-ui::run setted to open bgLoadingMask  when rootScope trigger $locationChangeStart');
+      //show mask if route change
+      $rootScope.$on('$locationChangeStart', function() {
+        appUI.showLoadingMask();
+      });
+      $log.log('App-ui::run setted to open bgLoadingMask  when rootScope trigger $locationChangeStart');
     
-    //bind a href to
-    $rootScope.$on('$locationChangeSuccess', function(){
-      //alert('yeee');
-    });
+      //bind a href to
+      $rootScope.$on('$locationChangeSuccess', function(){
+        //alert('yeee');
+      });
   } else {
-    $appUI.hideMask();
-    $log.log('App-ui::run hidden bgLoadingMask becouse is disabled');
+      appUI.hideMask();
+      $log.log('App-ui::run hidden bgLoadingMask becouse is disabled');
   }
 
-  $appUI.windowLayer.hide();
+  // Set windows system clone
+  $rootScope.$on('$viewContentLoaded', function(){
+      appUI.windowLayer.clone($location.path());
+  });
+  $log.log('App-ui::run setted to close bgLoadingMask  when rootScope trigger $viewContentLoaded');
+
+  // Hide the main windowLayer
+  appUI.windowLayer.hide();
   
   //set ui net status change advisor
-  if ($appUI.isNetChangeAdvisorEnable()){
-    $rootScope.$on('$appNetGoUp', $appUI.showGoUpMessage);
-    $rootScope.$on('$appNetGoDown', $appUI.showGoDownMessage);
+  if (appUI.isNetChangeAdvisorEnable()){
+    $rootScope.$on('$appNetGoUp', appUI.showGoUpMessage);
+    $rootScope.$on('$appNetGoDown', appUI.showGoDownMessage);
   }
   
   //fix container content size
-  $appUI.fixContainerContensSize();
-
-  //add icons in desktop (settings, my profile and welcome)
-  $appUI.desktop.addIcon('My Settings', 'img', '/settings');
+  appUI.fixContainerContensSize();
 
   //add close icon to nw-view window layer
-  $appUI.windowLayer.setCloseIcon('.windowLayer');
+  appUI.windowLayer.setCloseIcon('.windowLayer');
+
+  //add icon settings in desktop
+  appUI.desktop.addIcon('My Settings', 'img', '/settings');
   
   $log.log('App-ui::run end');
 });
@@ -64,7 +70,10 @@ angular.module('app.ui', [])
  * Load dependecies
  **/
 _load([
-  'js/core/ui/app-ui.factory.js',
+  'js/core/ui/app-ui.factory.base.js',
+  'js/core/ui/app-ui.factory.desktop.js',
+  'js/core/ui/app-ui.factory.mask.js',
+  'js/core/ui/app-ui.factory.window.js',
   'js/core/ui/app-ui.controllers.js',
   'js/core/ui/app-ui.components.js'
 ]);

@@ -7,11 +7,11 @@
 
 angular.module('users', [])
 
-.run(function($compile, $window, $log, $appUI){
+.run(function($compile, $window, $log, appUI){
   $log.log('Users::run ini');
   
   //add icon component to dashboard
-  $appUI.desktop.addIcon('Listado de usuarios registrados', 'img', '/users');
+  appUI.desktop.addIcon('Listado de usuarios registrados', 'img', '/users');
   
   $log.log('Users::run end');
 });
