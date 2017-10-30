@@ -38,6 +38,8 @@ angular.module('app.core', ['ngRoute', 'angularCSS', 'oc.lazyLoad', 'ng.deviceDe
 _load([
   'js/core/app-core.config.js',
   'js/core/app-core.constants.js',
+  'js/core/app-core.controllers.js',
+  'js/core/app-core.components.js',
   'js/core/app-core.factory.js',
   'js/core/app-core-ws.factory.js'
 ]);
