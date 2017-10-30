@@ -1,0 +1,13 @@
+/**
+ * CSS for MaIO App UI Footer Component View
+ **/
+
+.container.footer{
+  width: 100%;
+  height: 5px;
+  background-color: #ffffff;
+  
+  -webkit-box-shadow: -5px -5px 5px 0px rgba(216, 75, 44, 0.57);
+  -moz-box-shadow: -5px -5px 5px 0px rgba(216, 75, 44, 0.57);
+  box-shadow: -5px -5px 5px 0px rgba(216, 75, 44, 0.57);
+}
