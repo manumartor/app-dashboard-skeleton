@@ -46,7 +46,12 @@ angular.module('app.core')
       $location.path('/login');
     }
   };
-  
+
+  //bind dashboard link to hide all the window layers
+  $scope.dashboard = function(){ 
+    appUI.windowLayer.hide('.windowLayerStyle', 'fast');
+  };
+
   $rootScope.$emit('$appHeaderViewLoaded');
   
   $log.log("App-ui::headerLayerController end");
