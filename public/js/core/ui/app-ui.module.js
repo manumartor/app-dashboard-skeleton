@@ -44,9 +44,6 @@ angular.module('app.ui', [])
       appUI.windowLayer.clone($location.path());
   });
   $log.log('App-ui::run setted to close bgLoadingMask  when rootScope trigger $viewContentLoaded');
-
-  // Hide the main windowLayer
-  appUI.windowLayer.hide();
   
   //set ui net status change advisor
   if (appUI.isNetChangeAdvisorEnable()){

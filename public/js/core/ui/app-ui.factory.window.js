@@ -21,12 +21,13 @@
 	 */
  	service.hide = function(selector, t){
  		selector = selector == null? '.windowLayer': selector;
+
  		if (t == null){
           $(selector).hide();  
           return true;
         }
 
-        t = t == null? 0: t;
+        t = t == null? 'fast': t;
         //hide effect in windoLayer
         $(selector).fadeOut(t);
  	}
@@ -40,11 +41,46 @@
 	 * @params {int/string} t -> Optional: fast, slow, (int)ms (default: 1500ms)
 	 */
  	service.show = function(selector, t){
+ 		//get selector
  		selector = selector == null? '.windowLayer': selector;
- 		t = t == null? 1500: t;
+
+ 		//if no time for fadeIn received directly show the layer
+ 		if (t == null){
+ 			//show the layer
+          	$(selector).show();
+          	//set focus to z-index up
+          	service.focus(selector);
+          	return true;
+        }
+
+        //get time for fadeIn
+ 		t = t == null? 'fast': t;
+
         //show effect in windoLayer
         $(selector).fadeIn(t);
+        //set focus to z-index up
+        service.focus(selector);
  	}
+
+ 	/**
+ 	 * When focus in a windowLayer set z-index up
+ 	 * 
+ 	 * @params {string} selector -> Optional: jquery selector to show (default: .windowLayer)
+ 	 */
+ 	 service.focus = function(selector){
+ 	 	//get selector
+ 	 	selector = selector == null? '.windowLayer': selector;
+
+ 	 	// reset z-index of all windowLayer
+ 	 	cnt = 2;
+ 	 	$('.windowLayerStyle').each(function(i){
+ 	 		$(this).css('z-index', cnt);
+ 	 		cnt++;
+ 	 	});
+
+ 	 	// set the z-index of the selector to the most top one before BgMask
+ 	 	$(selector).css('z-index', 97);
+ 	 }
 
 	/**
 	 * Clone the ng-view windowLayer in a new o already created specific windowLayer for that view
@@ -60,45 +96,58 @@
         service.hide();
 
         //check if alredy exits layer for that view
-        id = url.substr(1);
-        if ($('#windowView_' + id).length == 0){
+        id = '#windowView_' + url.substr(1);
+        if ($(id).length == 0){
           	//clone windowLayer outside ng-view
-          	html = '<div id="windowView_' + id + '" class="windowLayerStyle ui-widget-content" style="display: none;">' + $('.windowLayer div').html() + '</div>';
+          	html = '<div id="' + id.substr(1) + '" class="windowLayerStyle ui-widget-content" style="display: none;">' + $('.windowLayer div').html() + '</div>';
           	$('.container.contens').append(html);
           	//set new windowLayer as graggable
-          	$('#windowView_' + id).draggable({
+          	$(id).draggable({
             	containment: ".container.contens", 
             	cursor: "move",
             	//cursorAt: {top: 50, left: 200},
             	scroll: false,
-            	opacity: 0.65
+            	opacity: 0.65,
+            	stop: function(evt){
+            		_id = '#' + $(evt.target).attr('id');
+          			service.focus(_id);
+            	}
           	});
           	// and set resizable
           	$(function(){
-            	$('#windowView_' + id).resizable({
+            	$(id).resizable({
               		containment: ".container.contens", 
               		animate: true,
               		minWidth: 400,
               		minHeight: 100,
               		//aspectRatio: true,
-              		//aspectRatio: 16 / 9
+              		//aspectRatio: 16 / 9,
+	            	stop: function(evt){
+	            		_id = '#' + $(evt.target).attr('id');
+	          			service.focus(_id);
+	            	}
             	});
           	}());
           	//add close icon and event
-          	service.setCloseIcon('#windowView_' + id);
-          	//put in desired position and sizes
+          	service.setCloseIcon(id);
+          	//put in the desired position and sizes
           	var w = $('.container.contents').css('width'),
             	h = $('.container.contents').css('height');
-          	service.move('#windowView_' + id, '15px', '80px');
-          	service.resize('#windowView_' + id, w, h);
-          	//show 
-          	service.show('#windowView_' + id);
+          	service.move(id, '15px', '80px');
+          	service.resize(id, w, h);
+          	//set on click layer the focus
+          	$(id).click(function(evt){
+          		_id = '#' + $(evt.target).attr('id');
+          		service.focus(_id);
+          	});
+          	//show the layer
+          	service.show(id, 'slow');
           	$log.log('App-ui::appUI cloned window: ' + url);
         } else {
-          	$('#windowView_' + id).html($('.windowLayer div').html());
+          	$(id).html($('.windowLayer div').html());
           	//add close icon and event
-          	service.setCloseIcon('#windowView_' + id);
-          	service.show('#windowView_' + id);
+          	service.setCloseIcon(id);
+          	service.show(id, 'slow');
           	$log.log('App-ui::appUI showing window: ' + url);
         }
 	}
@@ -138,9 +187,9 @@
 		selector = selector == null? '.windowLayer': selector;
 
 		//add close icon to selector layer
-		$(selector).append('<div class="closeIcon"><img src="img/close.png" title="Close"></div>');
+		$(selector).append('<div class="closeIcon"></div>');
 		$(selector + ' .closeIcon').click(function(evt){
-			$(evt.target).parent().parent().fadeOut('fast');
+			$(evt.target).parent().fadeOut('fast');
 		});
 	}
 
@@ -154,7 +203,7 @@
 	 */
 	service.move = function(selector, x, y, t){
 		selector = selector == null? '.windowLayer': selector;
-		t = t == null? 0: t;
+		t = t == null? 'slow': t;
 
 		if (y != null){
 			$(selector).animate({top: y}, t);
@@ -196,7 +245,7 @@
 	 */
 	service.resize = function(selector, w, h, t){;
 		selector = selector == null? '.windowLayer': selector;
-		t = t == null? 0: t;
+		t = t == null? 'slow': t;
 
 		if (w != null){
       		$(selector).animate({width: w}, t);

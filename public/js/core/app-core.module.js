@@ -19,13 +19,13 @@ angular.module('app.core', ['ngRoute', 'angularCSS', 'oc.lazyLoad', 'ng.deviceDe
 /**
  * Define run
  **/
-.run(function($log, $appCore, cfgAppDebug){
+.run(function($log, appCore, cfgAppDebug){
   $log.log('Module app-core::run ini');
   
   //log env info
-  $log.info('App::run env info: {device: ' + $appCore.getDevice() + ', os: ' + $appCore.getOS() + ', browser: ' + $appCore.getBrowser() + '}');
+  $log.info('App::run env info: {device: ' + appCore.getDevice() + ', os: ' + appCore.getOS() + ', browser: ' + appCore.getBrowser() + '}');
   if (cfgAppDebug){
-    $log.log('App::run browser info: ' + $appCore.getBrowserString());
+    $log.log('App::run browser info: ' + appCore.getBrowserString());
   }
   
   

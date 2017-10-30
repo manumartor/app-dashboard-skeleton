@@ -6,8 +6,8 @@
  **/
 
 angular.module('app.core')
-.factory('$appCore', function($log, $window, deviceDetector, detectUtils){
-  $log.log('App-core::$appCore ini');
+.factory('appCore', function($log, $window, deviceDetector, detectUtils){
+  $log.log('App-core::appCore ini');
 
   var browser = $window.navigator.userAgent;
   var services = {};
@@ -83,6 +83,6 @@ angular.module('app.core')
     return detectUtils.isIOS();
   };
 
-  $log.log('App-CORE::$appCore end');
+  $log.log('App-CORE::appCore end');
   return services;
 });

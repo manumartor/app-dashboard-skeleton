@@ -6,8 +6,8 @@
  **/
 
 angular.module('app.core')
-.factory('$appCoreWS', function($log, cfgAppWsInternal){
-  $log.log('App-core::$appCoreWS ini');
+.factory('appCoreWS', function($log, cfgAppWsInternal){
+  $log.log('App-core::appCoreWS ini');
 
   var services = {};
 
@@ -67,6 +67,6 @@ angular.module('app.core')
     $log.log('App-core::setCache end');
   };
 
-  $log.log('App-core::$appCoreWS end');
+  $log.log('App-core::appCoreWS end');
   return services;
 });

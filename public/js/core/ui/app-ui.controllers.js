@@ -72,9 +72,6 @@ angular.module('app.ui')
   
   $scope.lastPath = appHistory.getLastHistory();
   $log.error('App-ui::app404Controller path not found.' + ($scope.lastPath != null? ' Path: ' + $scope.lastPath: ''));
-
-
-  
   $log.info("App-ui::app404Controller end");
 })
 

@@ -4,6 +4,18 @@
  .windowLayerStyleFullscreen{
  	background-color: transparent;
  }
+.windowLayerStyleFullscreen .closeIcon{
+	top: 7px;
+	right: 7px;
+	background: #000 url("../img/close_white.png") no-repeat;
+	background-size: 20px 20px;
+}
+.windowLayerStyleFullscreen .closeIcon:hover{
+	width: 21px;
+  	height: 21px;
+  	background-size: 21px 21px;
+}
+
 .windowLayer .modalInfoMsg{
   width: 100%;
   height: 100%;

@@ -24,12 +24,6 @@ angular.module('app.core')
     css: 'css/404.css',
     templateUrl: "views/404.html", 
     controller: "app404Controller"})
-  .when("/myprofile", { 
-    templateUrl: "js/core/ui/views/myprofile.html",
-    controller: "appMyProfileController"})
-  .when("/myconfig", { 
-    templateUrl: "js/core/ui/views/myconfig.html",
-    controller: "appMyConfigController"})
   //set otherwise
   .otherwise({redirectTo: '/404'});
 });

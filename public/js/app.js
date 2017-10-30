@@ -31,7 +31,7 @@ angular.module('app', ['app.core', 'app.logger', 'app.config', 'app.net', 'app.u
 /**
  * Run module
  **/
-.run(function($injector, $route, $log, $window, $rootScope, $ocLazyLoad, $timeout, appUI, appCfg, appAuth, $location){
+.run(function($injector, $route, $log, $window, $rootScope, $ocLazyLoad, $timeout, $location, appUI, appCfg, appAuth){
   $log.log('App::run ini');
   
   //say hellow to user
