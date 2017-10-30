@@ -39,7 +39,7 @@
 
     	$timeout(function(){
       		$('.loadingMask').hide();
-      		$('.bgLoadingMask').hide();
+      		$('.container.mask').hide();
       		$log.log('App-ui::hide closed bgLoadingMask on rootScope $viewContentLoaded')
     	}, cfgAppUITimeClosedelay);
 
@@ -57,7 +57,7 @@
       		return false;
     	}
 
-    	$('.bgLoadingMask').show();
+    	$('.container.mask').show();
     	$log.log('App-ui::appUI.uiMask.show open bgLoadingMask on rootScope $locationChangeStart');
 
     	$log.log('App-ui::show end');
@@ -74,7 +74,7 @@
     	$('.loadingMask').show();
     
     	//2. show the mask
-    	$('.bgLoadingMask').show();
+    	$('.container.mask').show();
     	$log.log('App-ui::appUI.uiMask.showLoading open bgLoadingMask on rootScope $locationChangeStart');
 
     	$log.log('App-ui::appUI.uiMask.showLoading end');

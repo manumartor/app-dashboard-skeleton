@@ -74,3 +74,12 @@ angular.module('app.core')
   $log.error('App-ui::app404Controller path not found.' + ($scope.lastPath != null? ' Path: ' + $scope.lastPath: ''));
   $log.info("App-ui::app404Controller end");
 })
+
+/**
+* Define the mask controller
+*/
+.controller('maskLayerController', function ($scope, $log) {
+  $log.log("App-ui::footerLayerController ini");
+  
+  $log.log("App-ui::footerLayerController end");
+})

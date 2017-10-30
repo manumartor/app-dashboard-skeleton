@@ -51,33 +51,6 @@ body{
   z-index: 1;
 }
 
-.bgLoadingMask{
-  position: absolute;
-  top: 0;
-  height: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99;
-}
-.LoadingMaskContainer{
-  position: absolute;
-  top: 15px;
-  left: 13%;
-  width: 75%;
-  text-align: center;
-  z-index: 98;
-}
-.loadingMask{
-  display: inline-block;
-  min-width: 25%;
-  margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, 1);
-  border-radius: 5px;
-  z-index: 98;
-}
-
-
 /**
  * Desktop aplications styles
  **/

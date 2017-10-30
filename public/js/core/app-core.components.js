@@ -20,6 +20,15 @@ angular.module('app.core')
  **/
 .component('footerLayer', {
   css: 'css/footer.css',
-  templateUrl: "views/_footer.html", 
+  templateUrl: "views/footer.html", 
   controller: "footerLayerController"
+})
+
+/**
+ * Define maskLayer components
+ **/
+.component('maskLayer', {
+  css: 'css/mask.css',
+  templateUrl: "views/mask.html", 
+  controller: "maskLayerController"
 });
