@@ -2,15 +2,30 @@
  * CSS for MaIO App Contents Component
  **/
 
+.container.contens{
+  width: 100%;
+  height: 80%;
+  padding: 5px 0;
+}
+.container.contens a, .container.contens a:hover{
+  color: #000; 
+}
+
  /* Desktop Layer */
 .desktopLayer{
-  display: block;
-  width: 100%;
-  height: 100%;
   z-index: 1;
 }
+
 .rightBlocksLayer{
-	
+  padding-top: 5px;
+}
+
+.rightBlocksLayer .blockLayer{
+  min-height: 100px;
+	margin-bottom: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #fff;
 }
 
 /* Window Layer */
@@ -36,8 +51,8 @@
 .windowLayerStyleFullscreen{
   top: 75px;
   left: 15px;
-  width: 98%;
-  height: 70%;
+  width: 98% !important;
+  height: 70% !important;
 }
 .windowLayerStyleFullscreen div:first-child{
   width: 100%;

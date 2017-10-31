@@ -6,17 +6,27 @@
  **/
 
 angular.module('app.auth')
-.controller('loginController', function(appAuth, $log, $scope){
+.controller('loginController', function($log, $timeout, appAuth, appUI){
   $log.log('App-auth::loginController ini');
   //@todo: //https://github.com/sahat/satellizer
   
+  //set windowLayer
+  appUI.windowLayer.fullscreenOut();
+  appUI.windowLayer.hide('.windowLayerStyle');
+  $('.windowLayer .closeIcon').hide();
+  $timeout(function(){
+      appUI.windowLayer.show();
+      appUI.windowLayer.moveTopCenter();
+      appUI.windowLayer.resize(null, '400px', '350px');
+  }, 100);
+
   $log.info('App-auth::loginController end');
 })
 
-.controller('loginLayerController', function(appAuth, $scope, $rootScope, $location, $log){
+.controller('loginLayerController', function($scope, $rootScope, $location, $log, $timeout, appAuth, appUI){
   $log.log('App-auth::loginLayerController ini');
   //@todo: //https://github.com/sahat/satellizer
-  
+
   //1st of all clear credentials
   appAuth.clearCredentials();
   $rootScope.$emit('appAuthLoginKO');

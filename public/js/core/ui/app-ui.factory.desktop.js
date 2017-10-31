@@ -7,14 +7,16 @@
 
  angular.module('app.ui')
 
- .factory('uiDesktop', ['$log', 'uiWindow',  function($log, uiWindow){
+ .factory('uiDesktop', ['$log', '$timeout', '$compile', '$rootScope', 'uiWindow',  function($log, $timeout, $compile, $rootScope, uiWindow){
  	$log.log('App-ui::appUI.uiDesktop ini');
  	var service = {};
+ 	var icon_timewait = 200;
+ 	var block_timewait = 200;
 
 	/**
-	 * Add new icon acces to a path
+	 * Add new icon in desktop Layer like quick access to urls/paths
 	 */
-	service.addIcon = function(title, icon, target){
+	service.addIcon = function(title, icon, target, justLoad){
 	  	id = target.substr(1);
 	  	//add ico to desktopLayer
 	  	html  = '<div id="desktopIcon_' + id + '" class="desktopAppIconLayer"><a href="#!' + target + '" title="' + title + '"><div><i class="fa ' + icon + ' fa-5x"></i><br><p>' + title + '</p></div></a></div>';
@@ -35,6 +37,36 @@
 	      		uiWindow.show(id, 'slow');
 	    	}
 	  	});
+
+	  	//also set to add if loginOK
+	  	if (justLoad == undefined){
+		  	$rootScope.$on('appAuthLoginOK', function(){
+		  		$timeout(function() {
+		  			service.addIcon(title, icon, target, true);
+		  		}, icon_timewait);
+			});
+			icon_timewait++;
+		}
+	}
+
+	/**
+	 * Add block to rigth blocks Layer in desktop
+	 */
+	service.addBlock = function(id, component, justLoad){
+
+		//add block to rightBlocksLayer
+	  	html  = '<div id="blockLayer_' + id + '" class="blockLayer"><' + component + '></' + component + '></div>';
+	  	$('.rightBlocksLayer').append($compile(html)($rootScope));
+
+	  	//also set to add if loginOK
+	  	if (justLoad == undefined){
+		  	$rootScope.$on('appAuthLoginOK', function(){
+		  		$timeout(function() {
+		  			service.addBlock(id, component, true);
+		  		}, block_timewait);
+			});
+			block_timewait++;
+		}
 	}
 
 	$log.log('App-ui::appUI.uiDesktop end');

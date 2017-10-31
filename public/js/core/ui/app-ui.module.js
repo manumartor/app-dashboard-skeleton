@@ -57,8 +57,8 @@ angular.module('app.ui', [])
 
 
     $timeout(function() {
-        //add close icon to nw-view window layer
-        appUI.windowLayer.setCloseIcon('.windowLayer');
+        //add initial blocks
+        appUI.desktop.addBlock('welcome', 'welcome-block');
 
         //add icon settings in desktop
         appUI.desktop.addIcon('Mi Perfil', 'fa-user-circle', '/myprofile');
@@ -77,6 +77,7 @@ _load([
     'js/core/ui/app-ui.factory.mask.js',
     'js/core/ui/app-ui.factory.window.js',
     'js/core/ui/app-ui.directives.js',
+    'js/core/ui/app-ui.components.js',
     'js/core/ui/app-ui.controllers.js',
     'js/core/ui/app-ui.config.js'
 ]);

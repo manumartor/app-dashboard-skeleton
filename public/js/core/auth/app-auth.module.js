@@ -35,6 +35,18 @@ angular.module('app.auth', ['ngCookies'])
           $location.path('/login');
       }
   });
+
+  //expose appAuth.isLogged() to all the scope by the $rooScope 
+  $rootScope.isLogged = appAuth.isLogged();
+  //bind show user profile image to log on
+  $rootScope.$on('appAuthLoginOK', function(){
+    $rootScope.isLogged = appAuth.isLogged();
+  });
+  
+  //bind hidden user profile to image to login off
+  $rootScope.$on('appAuthLoginKO', function(){
+    $rootScope.isLogged = appAuth.isLogged();
+  });
   
   $log.log('App-auth::run end');
 });

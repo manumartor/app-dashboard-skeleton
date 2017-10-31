@@ -7,19 +7,19 @@
 
 angular.module('users', [])
 
-.run(function($compile, $window, $log, appUI){
-  $log.log('Users::run ini');
+.run(function($rootScope, $timeout, $log, appUI){
+  	$log.log('Users::run ini');
   
-  //add icon component to dashboard
-  appUI.desktop.addIcon('Usuarios', 'fa-users', '/users');
-  
-  $log.log('Users::run end');
+  	//add icon component to dashboard
+  	appUI.desktop.addIcon('Usuarios', 'fa-users', '/users');
+  	
+  	$log.log('Users::run end');
 });
 
 /**
  * Load dependecies
  **/
 _load([
-  'js/users/users.config.js',
-  'js/users/users.controllers.js'
+  	'js/users/users.config.js',
+  	'js/users/users.controllers.js'
 ]);

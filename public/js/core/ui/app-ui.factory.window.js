@@ -7,7 +7,7 @@
 
  angular.module('app.ui')
 
- .factory('uiWindow', ['$log', '$timeout',  'uiMask',  function($log, $timeout, uiMask){
+ .factory('uiWindow', ['$log', '$timeout', '$compile', '$rootScope', 'uiMask',  function($log, $timeout, $compile, $rootScope, uiMask){
  	$log.log('App-ui::appUI.uiWindow ini');
  	var service = {};
 
@@ -89,7 +89,7 @@
 	 */
 	service.clone = function(url){
 		//avoid to clone "/" and "/404"
-        if (url == '/' || url == '/404'){
+        if (url == '/' || url == '/404' || url == '/login'){
         	//hide loding mask
         	uiMask.hide();
           	return true;
@@ -101,53 +101,35 @@
         id = '#windowView_' + url.substr(1);
         if ($(id).length == 0){
           	//clone windowLayer outside ng-view
-          	html = '<div id="' + id.substr(1) + '" class="windowLayerStyle ui-widget-content" style="display: none;">' + $('.windowLayer div').html() + '</div>';
-          	$('.container.contens').append(html);
-          	//set new windowLayer as graggable
-          	$(id).draggable({
-            	containment: ".container.contens", 
-            	cursor: "move",
-            	//cursorAt: {top: 50, left: 200},
-            	scroll: false,
-            	opacity: 0.65,
-            	stop: function(evt){
-            		_id = '#' + $(evt.target).attr('id');
-          			service.focus(_id);
-            	}
-          	});
-          	// and set resizable
-          	$(function(){
-            	$(id).resizable({
-              		containment: ".container.contens", 
-              		animate: true,
-              		minWidth: 400,
-              		minHeight: 100,
-              		//aspectRatio: true,
-              		//aspectRatio: 16 / 9,
-	            	stop: function(evt){
-	            		_id = '#' + $(evt.target).attr('id');
-	          			service.focus(_id);
-	            	}
-            	});
-          	}());
-          	//add close icon and event
-          	service.setCloseIcon(id);
-          	//put in the desired position and sizes
-          	var w = $('.container.contents').css('width'),
-            	h = $('.container.contents').css('height');
-          	service.move(id, '15px', '80px');
-          	service.resize(id, w, h);
-          	//set on click layer the focus
-          	$(id).click(function(evt){
-          		_id = '#' + $(evt.target).attr('id');
-          		service.focus(_id);
-          	});
-          	//show the layer
-          	service.show(id, 500);
-          	$log.log('App-ui::appUI cloned window: ' + url);
+          	html = '<div id="' + id.substr(1) + '" class="windowLayerStyle ui-widget-content" style="display: none;" ng-if="$root.isLogged"><div>' + $('.windowLayer div').html() + '</div></div>';
+          	$('.container.contens').append($compile(html)($rootScope));
+          	$timeout(function(id) {
+          		//set new windowLayer as draggable
+	          	service.setDraggable(id);
+	          	// and set resizable
+	          	service.setResizable(id);
+	          	//and add close icon and event
+	          	service.setCloseIcon(id);
+	          	//put in the desired position and sizes
+	          	var w = $('.container.contents').css('width'),
+	            	h = $('.container.contents').css('height');
+	          	service.move(id, '15px', '80px');
+	          	service.resize(id, w, h);
+	          	//set on click layer the focus
+	          	$(id).click(function(evt){
+	          		_id = '#' + $(evt.target).attr('id');
+	          		service.focus(_id);
+	          	});
+	          	//show the layer
+	          	service.show(id, 500);
+	          	$log.log('App-ui::appUI cloned window: ' + url);
+          	}, 100, true, id);
         } else {
-          	$(id).html($('.windowLayer div').html());
-          	//add close icon and event
+        	
+        	html = angular.element('.windowLayer div').html();
+          	angular.element(id + ' div:first').html($compile(html)($rootScope));
+          	service.setDraggable(id);
+          	service.setResizable(id);
           	service.setCloseIcon(id);
           	service.show(id, 500);
           	$log.log('App-ui::appUI showing window: ' + url);
@@ -192,6 +174,10 @@
 	 */
 	service.setCloseIcon = function(selector){
 		selector = selector == null? '.windowLayer': selector;
+
+		if (angular.element(selector + ' .closeIcon').length > 0){
+			return;
+		}
 
 		//add close icon to selector layer
 		$(selector).append('<div class="closeIcon"></div>');
@@ -264,6 +250,60 @@
       	if (h != null){
       		$(selector).animate({height: h}, t);
       	}
+	}
+
+	/**
+	 * Set the windowLayer resizable if it's not yet
+	 *
+	 * @params {string} selector -> Optional: jquery selector to show (default: null)
+	 */
+	service.setResizable = function(selector){
+		if (selector == undefined){
+			return;
+		}
+
+		//check that already it's not resizable
+		if (angular.element(selector).hasClass('ui-resizable')){
+			return;
+		}
+
+		$(function(){
+        	$(selector).resizable({
+          		containment: ".container.contens", 
+          		animate: true,
+          		minWidth: 400,
+          		minHeight: 100,
+          		//aspectRatio: true,
+          		//aspectRatio: 16 / 9,
+            	stop: function(evt){
+            		_id = '#' + $(evt.target).attr('id');
+          			service.focus(_id);
+            	}
+        	});
+      	}());
+	}
+
+	service.setDraggable = function(selector){
+		if (selector == undefined){
+			return;
+		}
+
+		//check that already it's not resizable
+		if (angular.element(selector).hasClass('ui-draggable')){
+			return;
+		}
+
+		$(selector).draggable({
+        	containment: ".container.contens", 
+        	cursor: "move",
+        	//cursorAt: {top: 50, left: 200},
+        	scroll: false,
+        	opacity: 0.65,
+        	stop: function(evt){
+        		_id = '#' + $(evt.target).attr('id');
+      			service.focus(_id);
+        	}
+      	});
 	}
 
 	$log.log('App-ui::appUI.uiWindow end');

@@ -7,8 +7,8 @@
 angular.module('app.ui')
 
 /**
-* Define App 404 Page Controller
-*/
+ * Define App 404 Page Controller
+ */
 .controller('appMyProfileController', function ($scope, $log, appHistory) {
   $log.log("App-ui::appMyProfileController ini");
   
@@ -16,10 +16,19 @@ angular.module('app.ui')
 })
 
 /**
-* Define App 404 Page Controller
-*/
+ * Define App 404 Page Controller
+ */
 .controller('appMyConfigController', function ($scope, appHistory, $log) {
   $log.log("App-ui::appMyConfigController ini");
   
   $log.info("App-ui::app404Controller end");
+})
+
+/**
+ * Define welcome Block Controller
+ */
+.controller('welcomeBlockController', function ($scope, appHistory, $log) {
+  $log.log("App-ui::welcomeBlockController ini");
+  
+  $log.info("App-ui::welcomeBlockController end");
 });

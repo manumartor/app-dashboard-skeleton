@@ -1,9 +1,9 @@
 /**
  * CSS for MaIO Cloud Services signin page
  **/
+
 .container.signin{
   width: 100%;
-  margin-top: 110px;
   text-align: center;
-  color: #fff;
+  color: #000;
 }

@@ -9,12 +9,16 @@ angular.module('app.core')
 /**
 * Define App Home Page Controller
 */
-.controller('appHomeController', function ($rootScope, $scope, $timeout, $log, appUI) {
+.controller('appHomeController', function ($scope, $timeout, $log, appUI) {
   $log.log("App-ui::appHomeController ini");
-  appUI.windowLayer.fullscreenOut('.windowLayer');
+
+  //set windowLayer
+  appUI.windowLayer.fullscreenOut();
   $timeout(function(){
-      appUI.windowLayer.moveTopCenter();
+      appUI.windowLayer.setCloseIcon();
       appUI.windowLayer.show();
+      appUI.windowLayer.moveTopCenter();
+      appUI.windowLayer.resize(null, '400px', '200px');
   }, 100);
 
   $scope.msg = 'Bienvenido a la App Web/Mobile Dashboard Skeleton';
@@ -27,20 +31,6 @@ angular.module('app.core')
 */
 .controller('headerLayerController', function ($window, $scope, $rootScope, $log, $location, appAuth, appUI) {
   $log.log("App-ui::headerLayerController ini");
-  
-  //expose isLogged to scope to show profile picture or not
-  $scope.isLogged = appAuth.isLogged();
-  
-  //bind show user profile image to log on
-  $rootScope.$on('appAuthLoginOK', function(){
-    $scope.isLogged = appAuth.isLogged();
-    $rootScope.$emit('$appHeaderViewLoaded');
-  });
-  
-  //bind hidden user profile to image to login off
-  $rootScope.$on('appAuthLoginKO', function(){
-    $scope.isLogged = appAuth.isLogged();
-  });
   
   //bind logout link to ask is sure to log outer
   $scope.askLogout = function(){ 
@@ -62,9 +52,14 @@ angular.module('app.core')
 /**
 * Define the contents controller
 */
-.controller('contentsLayerController', function ($scope, $log) {
+.controller('contentsLayerController', function ($rootScope, $scope, $log, appAuth) {
   $log.log("App-ui::contentsLayerController ini");
   
+  //bind hidden user profile to image to login off
+  $rootScope.$on('appAuthLoginKO', function(){
+    $scope.isLogged = appAuth.isLogged();
+  });
+
   $log.log("App-ui::contentsLayerController end");
 })
 
@@ -82,9 +77,12 @@ angular.module('app.core')
 */
 .controller('app404Controller', function ($scope, appHistory, $log, appUI) {
   $log.log("App-ui::app404Controller ini");
-  appUI.windowLayer.moveTopLeft();
+
+  //set windowLayer
   appUI.windowLayer.show();
-  appUI.windowLayer.fullscreenIn('.windowLayer');
+  appUI.windowLayer.moveTopLeft();
+  appUI.windowLayer.setCloseIcon();
+  appUI.windowLayer.fullscreenIn();
   
   $scope.lastPath = appHistory.getLastHistory();
   $log.error('App-ui::app404Controller path not found.' + ($scope.lastPath != null? ' Path: ' + $scope.lastPath: ''));

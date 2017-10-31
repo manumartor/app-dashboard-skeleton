@@ -1,5 +1,13 @@
 <div class="container contens">
-	<div class="desktopLayer"></div>
-	<div class="rightBlocksLayer"></div>
-	<div class="windowLayer windowLayerStyle"><div ng-view></div></div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="desktopLayer" ng-if="$root.isLogged"></div>
+		</div>
+		<div class="col-md-4">
+			<div class="rightBlocksLayer" ng-if="$root.isLogged"></div>
+		</div>
+	</div>
+	<div class="windowLayer windowLayerStyle">
+		<div ng-view></div>
+	</div>
 </div>
