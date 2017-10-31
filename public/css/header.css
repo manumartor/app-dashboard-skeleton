@@ -23,6 +23,7 @@
   cursor: pointer;
 }
 
+
 /**
  * Styles for the logo layer
  */
@@ -31,12 +32,23 @@
   position: absolute;
   top: 15px;
   left: 39.5%;
-  background: url('../../../../img/bright.jpg') center top; 
+  
   min-width: 310px;
   min-height: 52px;
   padding: 10px;
+
+  /*font-family: cursive;*/
+  font-style: italic;
+  font-size: 26px;
+  font-weight: bold;
   text-align: center;
+
 }
+.logoLayer a{
+  color: rgba(216, 75, 44, 0.77);
+}
+
+
 /**
  * Style for the user profile icon and layer
  */
