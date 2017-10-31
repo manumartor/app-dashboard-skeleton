@@ -7,7 +7,7 @@
 
  angular.module('app.ui')
 
- .factory('uiDesktop', ['$log', '$timeout', '$compile', '$rootScope', 'uiWindow',  function($log, $timeout, $compile, $rootScope, uiWindow){
+ .factory('uiDesktop', ['$log', '$timeout', '$compile', '$location', '$rootScope', 'uiWindow',  function($log, $timeout, $compile, $location, $rootScope, uiWindow){
  	$log.log('App-ui::appUI.uiDesktop ini');
  	var service = {};
  	var icon_timewait = 200;
@@ -35,6 +35,11 @@
 	    	
 	    	if ($(id).length > 0){
 	      		uiWindow.show(id, 'slow');
+	    	} else {
+	    		//check path for reload
+	    		if ($location.path() == target){
+	    			uiWindow.clone($location.path());
+	    		}
 	    	}
 	  	});
 

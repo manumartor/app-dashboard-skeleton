@@ -47,7 +47,8 @@ angular.module('app', ['app.core', 'app.logger', 'app.config', 'app.net', 'app.u
           for (var routeName in $route.routes) {
             if ($route.routes.hasOwnProperty(routeName)) {
                 var route = $route.routes[routeName];
-                if (typeof route.originalPath == 'string' && route.originalPath == path){
+                
+                if (typeof route.originalPath == 'string' && route.originalPath.split('/')[1] == path.split('/')[1]){
                     $location.path(path); 
                     return;
                 }

@@ -12,6 +12,10 @@ angular.module('users')
   	$routeProvider.when("/users", {
 	    templateUrl: "js/users/views/users.html", 
 	    controller: "usersIniController"
+	})
+	.when("/users/:userid/view", {
+	    templateUrl: "js/users/views/view.html", 
+	    controller: "usersViewController"
 	});
 
 });

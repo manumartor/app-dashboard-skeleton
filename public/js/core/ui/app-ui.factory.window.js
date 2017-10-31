@@ -98,12 +98,16 @@
         service.hide();
 
         //check if alredy exits layer for that view
-        id = '#windowView_' + url.substr(1);
+        url = url.split('/');
+        //alert(url.length);
+        id = '#windowView_' + url[1];
+        //alert('1: ' + id + ' -> ' + $(id).length);
         if ($(id).length == 0){
           	//clone windowLayer outside ng-view
           	html = '<div id="' + id.substr(1) + '" class="windowLayerStyle ui-widget-content" style="display: none;" ng-if="$root.isLogged"><div>' + $('.windowLayer div').html() + '</div></div>';
           	$('.container.contens').append($compile(html)($rootScope));
           	$timeout(function(id) {
+          		//alert('2: ' + id + ' -> ' + $(id).length);
           		//set new windowLayer as draggable
 	          	service.setDraggable(id);
 	          	// and set resizable
@@ -123,14 +127,18 @@
 	          	//show the layer
 	          	service.show(id, 500);
 	          	$log.log('App-ui::appUI cloned window: ' + url);
-          	}, 100, true, id);
+          	}, 900, true, id);
         } else {
-        	
-        	html = angular.element('.windowLayer div').html();
-          	angular.element(id + ' div:first').html($compile(html)($rootScope));
+        	//load window content again
+        	if (url.length > 2){
+	        	html = angular.element('.windowLayer div').html();
+	          	angular.element(id + ' div:first').html($compile(html)($rootScope));
+	        }
+          	//set windowLayer if neccesary
           	service.setDraggable(id);
           	service.setResizable(id);
           	service.setCloseIcon(id);
+          	//and show windowLayer
           	service.show(id, 500);
           	$log.log('App-ui::appUI showing window: ' + url);
         }
@@ -182,7 +190,11 @@
 		//add close icon to selector layer
 		$(selector).append('<div class="closeIcon"></div>');
 		$(selector + ' .closeIcon').click(function(evt){
-			$(evt.target).parent().fadeOut('fast');
+			if ($(evt.target).parent().hasClass('windowLayer')){
+				$(evt.target).parent().fadeOut('fast');
+			} else {
+				$(evt.target).parent().remove();
+			}
 		});
 	}
 

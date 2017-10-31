@@ -7,13 +7,21 @@
 angular.module('users')
 
 /**
-* Define usersIniController Controller
-*/
-.controller('usersIniController', function ($rootScope, $scope, $log) {
+ * Define users ini controller
+ */
+.controller('usersIniController', ['$log', function ($log) {
   $log.log("Users::usersIniController ini");
   
-  //alert('users controller');
-  //$('.desktopWinLayer.users').html($('.windowLayer').html());
-  
   $log.info("Users::usersIniController end");
-})
+}])
+
+/**
+* Define users view controller
+*/
+.controller('usersViewController',['$log', '$routeParams', '$rootScope', function ($log, $routeParams, $rootScope) {
+  $log.log("Users::usersViewController ini");
+  
+  $rootScope.userid = $routeParams.userid;
+  
+  $log.info("Users::usersViewController end");
+}]);

@@ -21,7 +21,7 @@ angular.module('app.ui')
                         if (url == $location.path()){
 	                        var id = '#windowView_';
 	                        
-	                        if (url == '/' || url == '/404'){
+	                        if (url == '/' || url == '/404' || url == '/login'){
 	                          id = '.windowLayer';
 	                        } else {
 	                          id += url.substr(1);
