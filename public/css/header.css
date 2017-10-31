@@ -32,11 +32,11 @@
   top: 15px;
   left: 39.5%;
   background: url('../../../../img/bright.jpg') center top; 
-  min-width: 300px;
-  min-height: 45px;
+  min-width: 310px;
+  min-height: 52px;
+  padding: 10px;
   text-align: center;
 }
-
 /**
  * Style for the user profile icon and layer
  */

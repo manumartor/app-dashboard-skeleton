@@ -7,7 +7,7 @@
 
  angular.module('app.ui')
 
- .factory('uiWindow', ['$log', function($log){
+ .factory('uiWindow', ['$log', '$timeout',  'uiMask',  function($log, $timeout, uiMask){
  	$log.log('App-ui::appUI.uiWindow ini');
  	var service = {};
 
@@ -90,6 +90,8 @@
 	service.clone = function(url){
 		//avoid to clone "/" and "/404"
         if (url == '/' || url == '/404'){
+        	//hide loding mask
+        	uiMask.hide();
           	return true;
         }
         //hide windowLayer
@@ -141,15 +143,20 @@
           		service.focus(_id);
           	});
           	//show the layer
-          	service.show(id, 'slow');
+          	service.show(id, 500);
           	$log.log('App-ui::appUI cloned window: ' + url);
         } else {
           	$(id).html($('.windowLayer div').html());
           	//add close icon and event
           	service.setCloseIcon(id);
-          	service.show(id, 'slow');
+          	service.show(id, 500);
           	$log.log('App-ui::appUI showing window: ' + url);
         }
+
+        //hide lask after clone ng-view
+        $timeout(function(){
+        	uiMask.hide();
+        }, 700);
 	}
 
 	/**
@@ -224,6 +231,10 @@
 		var pw = parseInt($('.container.contens').css('width')),
             w = parseInt($(selector).css('width'));
         var x = (pw / 2) - (w / 2);
+        //alert('(' + pw + ' / 2) - (' + w + ' / 2) = ' + x);
+        if (x < 15){
+        	x = 15;
+        }
         service.move(selector, x + 'px', '80px', 'fast');
 	}
 

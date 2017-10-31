@@ -17,15 +17,17 @@
 	service.addIcon = function(title, icon, target){
 	  	id = target.substr(1);
 	  	//add ico to desktopLayer
-	  	html  = '<div id="desktopIcon_' + id + '" class="desktopAppIconLayer"><a href="#!' + target + '" title="' + title + '"><div>' + title + '</div></a></div>';
+	  	html  = '<div id="desktopIcon_' + id + '" class="desktopAppIconLayer"><a href="#!' + target + '" title="' + title + '"><div><i class="fa ' + icon + ' fa-5x"></i><br><p>' + title + '</p></div></a></div>';
 	  	$('.desktopLayer').append(html);
 	  
 	  	//on click icon change window
 	  	$('#desktopIcon_' + id).click(function(evt){
 	    	if ($(evt.target).attr('id') != undefined){
 	      		var id = $(evt.target).attr('id').split('_');
-	    	} else {
+	    	} else if ($(evt.target).parent().parent().attr('id') != undefined){
 	      		var id = $(evt.target).parent().parent().attr('id').split('_');
+	    	} else {
+	      		var id = $(evt.target).parent().parent().parent().attr('id').split('_');
 	    	}
 	    	id = '#windowView_' + id[1];
 	    	//$('.container.contens').append('<div ng-controller="' + id +'" class="windowLayerStyle" style="width: 50px;"></div>');

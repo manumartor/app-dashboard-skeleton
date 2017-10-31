@@ -16,6 +16,15 @@ angular.module('app.core')
 })
 
 /**
+ * Define contentsLayer components
+ **/
+.component('contentsLayer', {
+  css: 'css/contents.css',
+  templateUrl: "views/contents.html", 
+  controller: "contentsLayerController"
+})
+
+/**
  * Define footerLayer components
  **/
 .component('footerLayer', {

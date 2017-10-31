@@ -12,8 +12,10 @@ angular.module('app.core')
 .controller('appHomeController', function ($rootScope, $scope, $timeout, $log, appUI) {
   $log.log("App-ui::appHomeController ini");
   appUI.windowLayer.fullscreenOut('.windowLayer');
-  appUI.windowLayer.moveTopCenter();
-  appUI.windowLayer.show();
+  $timeout(function(){
+      appUI.windowLayer.moveTopCenter();
+      appUI.windowLayer.show();
+  }, 100);
 
   $scope.msg = 'Bienvenido a la App Web/Mobile Dashboard Skeleton';
   
@@ -58,6 +60,15 @@ angular.module('app.core')
 })
 
 /**
+* Define the contents controller
+*/
+.controller('contentsLayerController', function ($scope, $log) {
+  $log.log("App-ui::contentsLayerController ini");
+  
+  $log.log("App-ui::contentsLayerController end");
+})
+
+/**
 * Define footerLayerController
 */
 .controller('footerLayerController', function ($scope, $log) {
@@ -84,7 +95,7 @@ angular.module('app.core')
 * Define the mask controller
 */
 .controller('maskLayerController', function ($scope, $log) {
-  $log.log("App-ui::footerLayerController ini");
+  $log.log("App-ui::maskLayerController ini");
   
-  $log.log("App-ui::footerLayerController end");
+  $log.log("App-ui::maskLayerController end");
 })
