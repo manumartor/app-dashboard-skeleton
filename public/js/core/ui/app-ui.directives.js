@@ -7,7 +7,7 @@
 
 angular.module('app.ui')
 
-.directive("a", ['appUI', function (appUI) {
+.directive("a", ['$location', 'appUI', function ($location, appUI) {
     return {
         link: function (scope, element, attrs, controller) {
             element.bind('click', function () {
@@ -17,18 +17,21 @@ angular.module('app.ui')
                     //check if it's a internal url
                     if (url.substr(0, 3) == '#!/'){
                         url = attrs.href.substr(2);
-                        var id = '#windowView_';
-                        
-                        if (url == '/' || url == '/404'){
-                          id = '.windowLayer';
-                        } else {
-                          id += url.substr(1);
-                        }
-                        //alert(id);
+                        //check current url is same as requested one
+                        if (url == $location.path()){
+	                        var id = '#windowView_';
+	                        
+	                        if (url == '/' || url == '/404'){
+	                          id = '.windowLayer';
+	                        } else {
+	                          id += url.substr(1);
+	                        }
+	                        //alert(id);
 
-                        if ($(id).length > 0){
-                            appUI.windowLayer.show(id, 'slow');
-                        }
+	                        if ($(id).length > 0){
+	                            appUI.windowLayer.show(id, 'slow');
+	                        }
+	                    }
                     }
                 }
             });
