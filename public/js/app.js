@@ -32,7 +32,7 @@ angular.module('app', ['app.core', 'app.logger', 'app.config', 'app.net', 'app.u
     }, 1000);
   }
 
-  //bind lazy load modules to let time to load header end event
+  //bind lazy load modules to load header end event
   var modulesLoaded = false;
   $rootScope.$on('$locationChangeStart', function(){
     //check user auth and if funct modules are loaded

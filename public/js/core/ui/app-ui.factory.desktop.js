@@ -30,7 +30,7 @@
 	      		var id = $(evt.target).parent().parent().parent().attr('id').split('_');
 	    	}
 	    	id = '#windowView_' + id[1];
-	    	//$('.container.contens').append('<div ng-controller="' + id +'" class="windowLayerStyle" style="width: 50px;"></div>');
+	    	
 	    	if ($(id).length > 0){
 	      		uiWindow.show(id, 'slow');
 	    	}

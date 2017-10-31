@@ -76,6 +76,7 @@ _load([
     'js/core/ui/app-ui.factory.desktop.js',
     'js/core/ui/app-ui.factory.mask.js',
     'js/core/ui/app-ui.factory.window.js',
+    'js/core/ui/app-ui.directives.js',
     'js/core/ui/app-ui.controllers.js',
     'js/core/ui/app-ui.config.js'
 ]);
