@@ -104,12 +104,13 @@ alias l='ls -lah'" >> /home/ubuntu/.bashrc
   	apt-get -y install build-essential g++ binutils-doc git subversion
   	echo '-> installed commons tools!'
 
-  	echo '--> Finish setting enviroment...'
-
-    # Create logs dirs
+  	# Check exits logs dirs
     if ! [ -d /vagrant/logs ]; then
         mkdir /vagrant/logs
     fi
+    echo '--> Checked logs dir!!'
+
+  	echo '--> Finish setting enviroment...'
 }
 
 apache() {
