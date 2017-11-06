@@ -2,7 +2,7 @@
 
 main() {
   	echo "########################################"
-    	echo "###   VAGRANT BOOTSRTAP FILE V.1.2   ###"
+    echo "###   VAGRANT BOOTSRTAP FILE V.1.3   ###"
 	echo "########################################"
 
   	set_enviroment
@@ -60,11 +60,14 @@ main() {
   	if echo $@ | grep -q -w protractor; then
     	protractor
   	fi
+  	if echo $@ | grep -q -w ionic; then
+    	ionic
+  	fi
 	if echo $@ | grep -q -w phonegap; then
-	phonegap
+		phonegap
 	fi
 	if echo $@ | grep -q -w androidsdk; then
-	androidsdk
+		androidsdk
 	fi
   	if echo $@ | grep -q -w jmeter; then
     	jmeter
@@ -367,7 +370,7 @@ alias cloud-runmaiomanunittest='cd /vagrant/public/maioman && npm test'" > /etc/
 
 protractor() {
   	# Install protractor globally
-    npm install -g protractor
+    npm install -g protractor@latest
 
     # check exists save reports dir
     if ! [ -d "/vagrant/logs/testreports" ]; then
@@ -379,16 +382,25 @@ protractor() {
 
 phonegap() {
 	# Install phonegap
-	apt-get -y install default-jre
-  	npm install -g phonegap
+  	npm install -g phonegap@latest
 
 	androidsdk
 	
   	echo "--> Phonegap installed!!"
 }
 
+ionic() {
+	#Install ionic
+	npm install -g cordova@latest ionic@latest
+
+	androidsdk
+
+	echo "--> Ionic installed!!"
+}
+
 androidsdk() {
 	# Install AndroidSDK
+	apt-get -y install default-jre
 	wget http://dl.google.com/android/android-sdk_r24.2-linux.tgz
   	tar -xvf android-sdk_r24.2-linux.tgz
   	cd android-sdk-linux/tools
