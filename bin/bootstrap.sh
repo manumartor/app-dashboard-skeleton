@@ -2,8 +2,8 @@
 
 main() {
   	echo "########################################"
-    echo "###   VAGRANT BOOTSRTAP FILE V.1.1   ###"
-	  echo "########################################"
+    	echo "###   VAGRANT BOOTSRTAP FILE V.1.2   ###"
+	echo "########################################"
 
   	set_enviroment
 
@@ -60,6 +60,12 @@ main() {
   	if echo $@ | grep -q -w protractor; then
     	protractor
   	fi
+	if echo $@ | grep -q -w phonegap; then
+	phonegap
+	fi
+	if echo $@ | grep -q -w androidsdk; then
+	androidsdk
+	fi
   	if echo $@ | grep -q -w jmeter; then
     	jmeter
   	fi
@@ -369,6 +375,28 @@ protractor() {
   	fi
 
     echo "-->protractor installed!!"
+}
+
+phonegap() {
+	# Install phonegap
+	apt-get -y install default-jre
+  	npm install -g phonegap
+
+	androidsdk
+	
+  	echo "--> Phonegap installed!!"
+}
+
+androidsdk() {
+	# Install AndroidSDK
+	wget http://dl.google.com/android/android-sdk_r24.2-linux.tgz
+  	tar -xvf android-sdk_r24.2-linux.tgz
+  	cd android-sdk-linux/tools
+  	yes | ./android update sdk --no-ui
+  	echo "export PATH=${PATH}:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools
+export ANDROID_HOME=~/android-sdk-linux" >> $BASHRC_PATH
+
+	echo "--> Android SDK Installed!!"
 }
 
 jmeter() {
