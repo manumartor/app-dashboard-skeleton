@@ -2,8 +2,10 @@
 
 main() {
   	echo "########################################"
-    echo "###   VAGRANT BOOTSRTAP FILE V.1.3   ###"
+    echo "###   VAGRANT BOOTSRTAP FILE V.1.4   ###"
 	echo "########################################"
+
+	BASHRC_PATH=/home/ubuntu/.bashrc
 
   	set_enviroment
 
@@ -408,6 +410,8 @@ androidsdk() {
   	yes | ./android update sdk --no-ui
   	echo "export PATH=${PATH}:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools
 export ANDROID_HOME=~/android-sdk-linux" >> $BASHRC_PATH
+	
+	chown -R ubuntu:ubuntu /home/ubuntu/android-sdk-linux
 
 	echo "--> Android SDK Installed!!"
 }
