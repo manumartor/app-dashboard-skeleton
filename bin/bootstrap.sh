@@ -2,7 +2,7 @@
 
 main() {
   	echo "########################################"
-    echo "###   VAGRANT BOOTSRTAP FILE V.1.4   ###"
+    echo "###   VAGRANT BOOTSRTAP FILE V.1.5   ###"
 	echo "########################################"
 
 	BASHRC_PATH=/home/ubuntu/.bashrc
@@ -159,7 +159,7 @@ php() {
 	#Install PHP
 	PHP_XDEBUGINI=/etc/php/7.0/mods-available/xdebug.ini
 
-  	apt-get install -y php libapache2-mod-php php-cli php-mysql php-curl php-gd php-intl php-ldap php-mbstring php-soap php-sqlite3 php-xmlrpc php-xdebug
+  	apt-get install -y php libapache2-mod-php php-cli php-mysql php-curl php-gd php-intl php-ldap php-mbstring php-soap php-sqlite3 php-xmlrpc php-xdebug php-pgsql php-zip php-dom php-xml
 
   	#Configure PHP
   	if ! [ -f /etc/php/7.0/apache2/conf.d/1-general.ini ]; then
@@ -274,7 +274,7 @@ postgres() {
   	echo "alias psql='sudo -u postgres psql'" >> $BASHRC_PATH
 
   	# Config postgres
-  	sed -i -e "s/127.0.0.1\/32/192.168.50.1\/24/" /etc/postgresql/9.5/main/pg_hba.conf
+  	sed -i -e "s/127.0.0.1\/32/0.0.0.0\/0/" /etc/postgresql/9.5/main/pg_hba.conf
   	sed -i -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/9.5/main/postgresql.conf
   	sed -i -e "s/#log_destination/log_destination/" /etc/postgresql/9.5/main/postgresql.conf
   	sed -i -e "s/#logging_collector = off/logging_collector = on/" /etc/postgresql/9.5/main/postgresql.conf
@@ -353,12 +353,12 @@ karma() {
     apt-get install -y xvfb chromium-browser firefox
 
     if ! [ -f /etc/profile.d/custom.sh ]; then
-      echo "export DISPLAY=:99.0
+      echo "export DISPLAY=:0.0
 export CHROME_BIN=/usr/bin/chromium-browser
 export FIREFOX_BIN=/usr/bin/firefox
 
 alias cloud-runallunittest=/vagrant/bin/rununittest.sh
-alias cloud-runmaiomanunittest='cd /vagrant/public/maioman && npm test'" > /etc/profile.d/custom.sh
+alias cloud-runmaiomanunittest='cd /vagrant/public/maioman && npm test'" >> $BASHRC_PATH
     fi
     npm install -g karma karma-cli  
     npm install -g jasmine-core jasmine-node jasmine-reporters karma-jasmine karma-chrome-launcher karma-firefox-launcher karma-coverage karma-junit-reporter
@@ -385,35 +385,61 @@ protractor() {
 
 phonegap() {
 	# Install phonegap
-  	npm install -g phonegap@latest
+  npm install -g phonegap@latest
 
 	androidsdk
 	
-  	echo "--> Phonegap installed!!"
+  echo "--> Phonegap installed!!"
 }
 
 ionic() {
 	#Install ionic
-	npm install -g cordova@latest ionic@latest
+	npm install -g cordova ionic@2.2.3
+
+  #Fix privileges
+  chown -R ubuntu:ubuntu /usr/lib/node_modules
 
 	androidsdk
 
-	echo "--> Ionic installed!!"
+	echo "--> Ionic 2.2.3 installed!!"
 }
 
 androidsdk() {
 	# Install AndroidSDK
-	apt-get -y install default-jre
-	wget http://dl.google.com/android/android-sdk_r24.2-linux.tgz
-  	tar -xvf android-sdk_r24.2-linux.tgz
-  	cd android-sdk-linux/tools
-  	yes | ./android update sdk --no-ui
-  	echo "export PATH=${PATH}:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools
-export ANDROID_HOME=~/android-sdk-linux" >> $BASHRC_PATH
+	apt-get -y install default-jre default-jdk unzip gradle libqt5widgets5
+
+  wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+  
+  unzip sdk-tools-linux-3859397.zip -d android-sdk-linux
+
+  echo "export PATH=${PATH}:~/android-sdk-linux/tools:~/android-sdk-linux/tools/bin:~/android-sdk-linux/platform-tools
+export ANDROID_HOME=~/android-sdk-linux
+export ANDROID_SDK_ROOT=~/android-sdk-linux
+export LD_LIBRARY_PATH=/usr/lib" >> $BASHRC_PATH
+
+  cd android-sdk-linux/tools/bin
+  #./sdkmanager tools platform-tools "platforms;android-27" "build-tools;27.0.1" emulator "system-images;android-27;google_apis;armeabi-v7a" --verbose
+  yes | ./sdkmanager tools platform-tools "platforms;android-25" "build-tools;25.0.3" "system-images;android-25;google_apis;armeabi-v7a" "system-images;android-25;google_apis;arm64-v8a" --verbose
+  yes | ./sdkmanager --licenses
+  #avdmanager -v create avd -n test2 -k "system-images;android-25;google_apis;armeabi-v7a" -f --abi google_apis/armeabi-v7a
+  avdmanager -v create avd -n test -k "system-images;android-25;google_apis;arm64-v8a" -f --abi google_apis/arm64-v8a
+  #/home/ubuntu/android-sdk-linux/emulator/emulator64-arm @test -debug all -netdelay none -netspeed full -show-kernel -verbose -logcat '*:v' > /vagrant/logs/android-emulator-console.log
+  # MM2 ionic 2.2.3 gradle fix
+  # http://dl.google.com/android/android-sdk_r24.3-linux.tgz
+
+
+  # OLD WAY OF INSTALL:
+	#wget http://dl.google.com/android/android-sdk_r24.2-linux.tgz
+  #tar -xvf android-sdk_r24.2-linux.tgz
+  #cd android-sdk-linux/tools
+  #yes | ./android update sdk --no-ui
+  #echo "export PATH=${PATH}:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools
+#export ANDROID_HOME=~/android-sdk-linux" >> $BASHRC_PATH
 	
+  #Fix privileges
 	chown -R ubuntu:ubuntu /home/ubuntu/android-sdk-linux
 
-	echo "--> Android SDK Installed!!"
+	echo "--> Android SDK v.24.2 Installed!!"
 }
 
 jmeter() {
