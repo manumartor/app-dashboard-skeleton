@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'test/unit/**/*[sS]pec.js',
-        'vendors/jquery/jquery.min.js',
+        'vendors/jquery/dist/jquery.min.js',
         'test/unit/autoloadfake.js',
         'vendors/angular/angular.js',
         'vendors/angular-mocks/angular-mocks.js',
@@ -46,12 +46,12 @@ module.exports = function(config) {
     reporters: ['progress', 'junit', 'coverage'],
 
     junitReporter: {
-        outputFile: '../../logs/unittest_reports/maioman/junit/junit.xml',
+        outputFile: '../../logs/testreports/unittest/app-desktop-skeleton/junit/junit.xml',
         suite: 'unit'
     },
 
     coverageReporter: {
-        dir: '../logs/unittest_reports/maioman/coverage/',
+        dir: '../logs/testreports/unittest/app-desktop-skeleton/coverage/',
         watermarks: {
             statements: [50, 75],
             functions: [50, 75],

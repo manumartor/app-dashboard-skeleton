@@ -112,8 +112,8 @@ apache() {
     	echo "<?php phpinfo();" >> /vagrant/public/index.php
   	fi
 
-  	sed -i "s/^\(.*\)www-data/\1ubuntu/g" /etc/apache2/envvars
-  	chown -R ubuntu:ubuntu /var/log/apache2
+  	sed -i "s/^\(.*\)www-data/vagrant/g" /etc/apache2/envvars
+  	chown -R vagrant:vagrant /var/log/apache2
 
   	if [ ! -f "/etc/apache2/sites-available/vagrant_vhost.conf" ]; then
     	cat << EOF > /etc/apache2/sites-available/vagrant_vhost.conf
@@ -338,7 +338,7 @@ gulp() {
 
 karma() {
   	# Install karma globally
-    apt-get install -y xvfb chromium-browser firefox
+    apt-get install -y xvfb chromium-browser firefox gdb
 
     if ! [ -f /etc/profile.d/custom.sh ]; then
       echo "export DISPLAY=:99.0

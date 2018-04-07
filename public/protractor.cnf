@@ -23,7 +23,7 @@ exports.config = {
   	showColors: true
   },
 
-  resultJsonOutputFile: '../logs/e2etest_reports/output.json',
+  resultJsonOutputFile: '../logs/testreports/e2etest/output.json',
 
   ignoreUncaughtExceptions: true
 }
